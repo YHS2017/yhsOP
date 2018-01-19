@@ -1,0 +1,14 @@
+.notice{
+  width: 100%;
+  margin: 20px 0;
+}
+.alert{
+  margin: 0;
+  height: 60px;
+  line-height: 28px;
+}
+.notice span{
+  margin-right: 10px;
+  font-size: 18px;
+  top:5px;
+}

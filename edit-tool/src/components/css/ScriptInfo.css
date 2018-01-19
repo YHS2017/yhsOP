@@ -1,0 +1,65 @@
+.scriptinfo{
+  position: fixed;
+  width: 360px;
+  height: 580px;
+  top:50%;
+  left: 50%;
+  margin: -290px 0 0 -180px;
+  background-color:#eee;
+  box-shadow:0px 0px 5px 1px  #777;
+  z-index: 100;
+  display: none;
+}
+.title{
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
+}
+.close{
+  position: absolute;
+  right: 10px;
+  line-height: 40px;
+  cursor: pointer;
+}
+.checkbox{
+  margin: 0;
+  user-select:none;
+}
+.checkbox i{
+  font-style: normal;
+}
+.checkbox input:checked+i{
+  color: #5bc0de;
+}
+.row{
+  padding: 10px 0 0 0;
+}
+.tip{
+  padding: 0 0 5px 0;
+}
+.tips{
+  padding: 0;
+  margin: 0;
+}
+.noresize{
+  resize: none;
+}
+.upload{
+  position: absolute;
+  top:-300px;
+  left:-300px;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+.lab_upload{
+  position: relative;
+  overflow: hidden;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  line-height: 120px;
+  background-color:#ddd; 
+  color: #777;
+  cursor: pointer;
+}
