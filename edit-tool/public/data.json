@@ -1,626 +1,402 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "title": "午夜追凶1",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "2",
-        "title": "霸道仲裁爱上我1",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
+        "id": 2,
+        "title": "午夜追凶1",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "3",
-        "title": "花之魂1",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
+        "id": 3,
+        "title": "午夜追凶1",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script":""
     },
     {
-        "id": "4",
-        "title": "梦中鱼1",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
+        "id": 4,
+        "title": "午夜追凶1",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "5",
+        "id": 5,
         "title": "午夜追凶2",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "6",
-        "title": "霸道仲裁爱上我2",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
+        "id": 6,
+        "title": "午夜追凶2",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "7",
-        "title": "花之魂2",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
+        "id": 7,
+        "title": "午夜追凶2",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script":""
     },
     {
-        "id": "8",
-        "title": "梦中鱼2",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
+        "id": 8,
+        "title": "午夜追凶2",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "9",
+        "id": 9,
         "title": "午夜追凶3",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script":""
     },
     {
-        "id": "10",
-        "title": "霸道仲裁爱上我3",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
+        "id": 10,
+        "title": "午夜追凶3",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "11",
-        "title": "花之魂3",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
+        "id": 11,
+        "title": "午夜追凶3",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "12",
-        "title": "梦中鱼3",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
+        "id": 12,
+        "title": "午夜追凶3",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "13",
+        "id": 13,
         "title": "午夜追凶4",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "14",
-        "title": "霸道仲裁爱上我4",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
+        "id": 14,
+        "title": "午夜追凶4",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "15",
-        "title": "花之魂4",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
+        "id": 15,
+        "title": "午夜追凶4",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     },
     {
-        "id": "16",
-        "title": "梦中鱼4",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "17",
-        "title": "午夜追凶5",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "18",
-        "title": "霸道仲裁爱上我5",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "19",
-        "title": "花之魂5",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "20",
-        "title": "梦中鱼5",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "21",
-        "title": "午夜追凶6",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "22",
-        "title": "霸道仲裁爱上我6",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "23",
-        "title": "花之魂6",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "24",
-        "title": "梦中鱼6",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "25",
-        "title": "午夜追凶7",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "26",
-        "title": "霸道仲裁爱上我7",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "27",
-        "title": "花之魂7",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "28",
-        "title": "梦中鱼7",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "29",
-        "title": "午夜追凶8",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "30",
-        "title": "霸道仲裁爱上我8",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "31",
-        "title": "花之魂8",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "32",
-        "title": "梦中鱼8",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "33",
-        "title": "午夜追凶9",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "34",
-        "title": "霸道仲裁爱上我9",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "35",
-        "title": "花之魂9",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "36",
-        "title": "梦中鱼9",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "37",
-        "title": "午夜追凶10",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "38",
-        "title": "霸道仲裁爱上我10",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "39",
-        "title": "花之魂10",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "40",
-        "title": "梦中鱼10",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "41",
-        "title": "午夜追凶11",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "42",
-        "title": "霸道仲裁爱上我11",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "43",
-        "title": "花之魂11",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "44",
-        "title": "梦中鱼11",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
-    },
-    {
-        "id": "45",
-        "title": "午夜追凶12",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "3.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 500,
-        "star": 200,
-        "comment": 30,
-        "reward": 20,
-        "status": "已评优"
-    },
-    {
-        "id": "46",
-        "title": "霸道仲裁爱上我12",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "短篇",
-        "number": "0.2",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 300,
-        "star": 123,
-        "comment": 13,
-        "reward": 12,
-        "status": "已评优"
-    },
-    {
-        "id": "47",
-        "title": "花之魂12",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "4.3",
-        "tips": "阳光,活力,二次元",
-        "read": 523,
-        "star": 156,
-        "comment": 53,
-        "reward": 32,
-        "status": "未过审"
-    },
-    {
-        "id": "48",
-        "title": "梦中鱼12",
-        "img": "http://img0.imgtn.bdimg.com/it/u=1018364764,1223529536&fm=27&gp=0.jpg",
-        "type": "连载",
-        "number": "1.7",
-        "tips": "暖男,霸道,高冷,二次元",
-        "read": 420,
-        "star": 59,
-        "comment": 15,
-        "reward": 21,
-        "status": "已过审"
+        "id": 16,
+        "title": "午夜追凶4",
+        "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+        "text": "",
+        "tags": "暖男,霸道,高冷,二次元,&",
+        "author_id": 0,
+        "character_count": 2235458,
+        "update_time": "2018-01-31 18:20:20",
+        "content": {
+            "roles":[],
+            "galleries":[],
+            "paragraphtree": [
+                {
+                    "id": 1,
+                    "type": "text",
+                    "title": "未命名段落",
+                    "chat_id": 0,
+                    "paragraphtxt": "",
+                    "nextid": 0
+                }
+            ]
+        },
+        "script": ""
     }
 ]

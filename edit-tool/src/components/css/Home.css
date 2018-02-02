@@ -1,0 +1,56 @@
+.line{
+  border-bottom: 1px solid #ddd;
+  margin: 10px;
+}
+.line h2{
+  margin-top: 0;
+}
+.pagination{
+  width: 100%;
+  text-align: center;
+}
+.list{
+  width: 100%;
+  min-height: 390px;
+}
+.isnull{
+  width: 100%;
+  text-align: center;
+}
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  margin: 0px;
+  line-height: 10vh;
+  border:1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  z-index: 200;
+}
+.header h3{
+  height: 10vh;
+  line-height: 10vh;
+  margin: 0;
+  padding: 0;
+}
+.header .row{
+  padding: 0;
+}
+.userphoto{
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  margin: 0 10px;
+}
+.user{
+  min-width: 80px;
+}
+.content{
+  position: relative;
+  margin-top: 10vh;
+  height: 90vh;
+  overflow: auto;
+}

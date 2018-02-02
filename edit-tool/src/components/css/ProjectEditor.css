@@ -1,0 +1,141 @@
+.back{
+  float: left;
+  width: 12vw;
+  height: 10vh;
+  line-height: 10vh;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+.back:hover{
+  color: dodgerblue;
+}
+.projecttitle{
+  float: left;
+  width: 55vw;
+  height: 10vh;
+  line-height: 10vh;
+  text-align: center;
+}
+.toolbar{
+  float: left;
+  width: 30vw;
+  height: 10vh;
+  line-height: 10vh;
+}
+.paragraphtree{
+  position: absolute;
+  top:10vh;
+  left: 0;
+  width: 100%;
+  height: 90vh;
+  padding: 0 0 150px 0;
+  background-color: #fff;
+  overflow: auto;
+}
+.type-text{
+  position: relative;
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 0 2px 2px #ddd;
+  margin: 10px 10px 10px 200px;
+  background-color: #eee;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 25px;
+}
+.text-title{
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+}
+.type-selection{
+  position: relative;
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 0 2px 2px #ddd;
+  margin: 10px 10px 10px 200px;
+  background-color: forestgreen;
+  cursor: pointer;
+  text-align: center;
+}
+.type-link{
+  position: relative;
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  margin: 10px 10px 10px 200px;
+  border: 2px dotted #999;
+  text-align: center;
+  cursor: pointer;
+  text-align: center;
+}
+.type-ending{
+  position: relative;
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 0 2px 2px #ddd;
+  margin: 10px 10px 10px 200px;
+  background-color: #fc617f;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 25px;
+}
+.tools{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 160px;
+  display: none;
+  text-align: center;
+  z-index: 100;
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 0 2px 2px #ddd;
+  border-radius: 5px;
+}
+.type-text:hover,.type-link:hover,.type-ending:hover,.type-selection:hover{
+  box-shadow: 0 0 2px 2px #8ab0fa;
+}
+.type-text.current,.type-ending.current{
+  background-color: #8ab0fa;
+  color: #fff;
+}
+.type-text:hover .tools,.type-link:hover .tools,.type-ending:hover .tools,.type-selection:hover .tools{
+  display: block;
+}
+.type-selection input{
+  width: 150px;
+  height: 30px;
+  margin: 10px 5px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+.selecttionnum{
+  position: fixed;
+  top: 50%;
+  left: 30%;
+  width: 200px;
+  height: 120px;
+  margin: -60px 0 0 -100px;
+  z-index: 200;
+  background-color: #fff;
+  box-shadow: 0 0 3px 3px #ddd;
+  text-align: center;
+}
+.selecttionnum.show{
+  display: block;
+}
+.selecttionnum.hide{
+  display: none;
+}
+.selecttionnum .btn-success{
+  margin: 5px 0;
+}

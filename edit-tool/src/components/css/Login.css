@@ -1,16 +1,16 @@
-.header{
-  height: 80px;
-  margin: 0px;
-  line-height: 80px;
-  border:1px solid #ddd;
+.loginbox{
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 0 3px 3px #ccc;
+  background-color: #eee;
+  margin: -100px 0 0 -150px;
   border-radius: 5px;
 }
-.userphoto{
-  width: 50px;
-  height: 50px;
-  border-radius: 30px;
-  margin: 0 10px;
-}
-.user{
-  min-width: 80px;
+.btn.loginbtn{
+  margin: 20px;
+  width: 100px;
 }

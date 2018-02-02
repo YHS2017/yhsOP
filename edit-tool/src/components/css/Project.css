@@ -1,16 +1,16 @@
-.script_pic{
+.project_pic{
   max-width: 180px;
   height: 120px;
 }
-.script{
+.project{
   margin-bottom:10px; 
   text-align: center;
   height: 120px;
 }
-.btn{
+.project .btn{
   margin: 5px;
 }
-.script p{
+.project p{
   line-height: 20px;
 }
 .status{

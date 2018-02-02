@@ -1,0 +1,143 @@
+{
+  "id": 1,
+  "title": "午夜追凶1",
+  "image": "https://avatars0.githubusercontent.com/u/24862812?s=40&v=4",
+  "text": "",
+  "tags": "暖男,霸道,高冷,二次元,&",
+  "author_id": 0,
+  "character_count": 2235458,
+  "update_time": "2018-01-31 18:20:20",
+  "content": {
+    "roles": [
+      {
+        "id": 1,
+        "type": "NPC",
+        "name": "role1",
+        "profile": "",
+        "galleries": []
+      },
+      {
+        "id": 2,
+        "type": "NPC",
+        "name": "role2",
+        "profile": "",
+        "galleries": []
+      },
+      {
+        "id": 3,
+        "type": "NPC",
+        "name": "role3",
+        "profile": "",
+        "galleries": []
+      }
+    ],
+    "galleries": [
+      {
+        "id": 1,
+        "title": "回忆1",
+        "items": []
+      },
+      {
+        "id": 2,
+        "title": "回忆2",
+        "items": []
+      },
+      {
+        "id": 3,
+        "title": "回忆3",
+        "items": []
+      }
+    ],
+    "paragraphtree": [
+      {
+        "id": 1,
+        "type": "text",
+        "title": "段落1",
+        "chat_id": "role1",
+        "paragraphtxt": "@role1\n水电费水电费是是放松放松地方施工方\n\n#img#role2\nhttps://ss0.baidu.com/73x1bjeh1BF3odCf/it/u=3230797267,3362750676&fm=85&s=B78A6FA1CE03324506BE07A90300A006\n=>回忆1\n\n#video#role1\n豆腐干豆腐干\nhttps://ss0.baidu.com/73x1bjeh1BF3odCf/it/u=3230797267,3362750676&fm=85&s=B78A6FA1CE03324506BE07A90300A006\n=>回忆2\n\n#link#role1\n李瑞中了彩票\n李瑞中的500万的彩票，开心过头进了医院\nhttps://ss0.baidu.com/1212211\nhttps://ss0.baidu.com/363636\n\n==15\n\n&num&\n好感度+50\n\n&range&\n好感度\n20,100\n第二章,第三章,第四章\n\n&busy&role1\nAAA正在忙着偷拍\n\n&will&\n狗仔李瑞剧本即将开始\n60",
+        "nextid": 2
+      },
+      {
+        "id": 2,
+        "type": "text",
+        "title": "段落2",
+        "chat_id": "role1",
+        "paragraphtxt": "",
+        "nextid": 3
+      },
+      {
+        "id": 3,
+        "type": "select",
+        "title": "未命名",
+        "chat_id": 0,
+        "paragraphtxt": "",
+        "option": {
+          "id": 0,
+          "text": "选项1",
+          "next_paragraph_id": 4
+        }
+      },
+      {
+        "id": 3,
+        "type": "select",
+        "title": "未命名",
+        "chat_id": 0,
+        "paragraphtxt": "",
+        "option": {
+          "id": 1,
+          "text": "选项2",
+          "next_paragraph_id": 5
+        }
+      },
+      {
+        "id": 4,
+        "type": "text",
+        "title": "分支段落1",
+        "chat_id": "role1",
+        "paragraphtxt": "",
+        "nextid": 6
+      },
+      {
+        "id": 5,
+        "type": "text",
+        "title": "分支段落2",
+        "chat_id": "role1",
+        "paragraphtxt": "",
+        "nextid": 7
+      },
+      {
+        "id": 6,
+        "type": "text",
+        "title": "后续段落1",
+        "chat_id": "role1",
+        "paragraphtxt": "",
+        "nextid": 8
+      },
+      {
+        "id": 7,
+        "type": "text",
+        "title": "后续段落2",
+        "chat_id": "role1",
+        "paragraphtxt": "",
+        "nextid": 9
+      },
+      {
+        "id": 8,
+        "type": "ending",
+        "title": "结局1",
+        "chat_id": "role1",
+        "paragraphtxt": "#end#\nBad Ending!\n李瑞又来了，这是个Bad Ending哦\nhttps://ss0.baidu.com/73x1bjeh1BF3odCf/it/u=3230797267,3362750676&fm=85&s=B78A6FA1CE03324506BE07A90300A006\n=>结局",
+        "nextid": 0
+      },
+      {
+        "id": 9,
+        "type": "ending",
+        "title": "结局2",
+        "chat_id": "role1",
+        "paragraphtxt": "#end#\nHappy Ending!\n李瑞死了，这是个Happy Ending哦\nhttps://ss0.baidu.com/73x1bjeh1BF3odCf/it/u=3230797267,3362750676&fm=85&s=B78A6FA1CE03324506BE07A90300A006\n=>结局",
+        "nextid": 0
+      }
+    ]
+  },
+  "script": ""
+}
