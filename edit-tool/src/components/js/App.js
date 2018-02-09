@@ -19,21 +19,21 @@ class App extends Component {
         <div>
           <Route path="/login" component={Login} />
           <Route path="/Author" component={Author} />
+          <div className={"mo " + (this.props.loadingshow === 0 ? '' : 'show')}>
+            <img src="../../loading.gif" />
+          </div>
         </div>
-      </Router>
+      </Router >
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {  }
+  return { loadingshow: state.loadingshow }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    // upcount: () => { dispatch({ type: 'UP_COUNT' }) },
-    // downcount: () => { dispatch({ type: 'DOWN_COUNT' }) }
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

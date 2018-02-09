@@ -2,8 +2,10 @@ import initstate from '../state/';
 
 const reducer = (state = initstate, action) => {
   switch (action.type) {
-    case 'TO_LOGIN':
+    case 'SET_USER':
       return { ...state, user: action.parames.user };
+    case 'SET_TOKEN':
+      return { ...state, token: action.parames.token };
     case 'SET_PROJECTS':
       return { ...state, projects: action.parames.projects };
     case 'SET_PROJECT':
@@ -16,6 +18,8 @@ const reducer = (state = initstate, action) => {
       return { ...state, currentparagraphid: action.parames.currentparagraphid };
     case 'SET_CURRENT_OPTIONID':
       return { ...state, currentoptionid: action.parames.currentoptionid };
+    case 'SET_LOADINGSHOW':
+      return { ...state, loadingshow: action.parames.loadingshow };
     default:
       return state;
   }

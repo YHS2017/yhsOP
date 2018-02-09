@@ -139,10 +139,10 @@
   position: fixed;
   top:50%;
   left: 50%;
-  margin: -140px 0 0 -150px;
+  margin: -150px 0 0 -150px;
   box-shadow: 0 0 5px 3px #ddd;
   width: 300px;
-  height: 280px;
+  height: 300px;
   z-index: 200;
   padding: 10px;
   background-color: #fff;

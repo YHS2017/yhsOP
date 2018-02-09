@@ -7,6 +7,13 @@
   text-align: center;
   height: 120px;
 }
+.project h3{
+  height: 20px;
+  line-height: 20px;
+  font-size: 20px;
+  overflow: hidden;
+}
+
 .project .btn{
   margin: 5px;
 }

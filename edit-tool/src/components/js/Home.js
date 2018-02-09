@@ -14,22 +14,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
       index: 1
     }
-  }
-
-  componentWillMount() {
-    fetch('../../data.json').then(data => {
-      data.text().then(listdata => {
-        if (listdata === '') {
-          return
-        } else {
-          const list = JSON.parse(listdata);
-          this.props.setprojects(list);
-        }
-      })
-    });
   }
 
   pageup = () => {
@@ -97,10 +83,30 @@ class Home extends Component {
     return pagebtns;
   }
 
+  dateFtt = (fmt, date) => { //author: meizz   
+    var o = {
+      "M+": date.getMonth() + 1,                 //月份   
+      "d+": date.getDate(),                    //日   
+      "h+": date.getHours(),                   //小时   
+      "m+": date.getMinutes(),                 //分   
+      "s+": date.getSeconds(),                 //秒   
+      "q+": Math.floor((date.getMonth() + 3) / 3), //季度   
+      "S": date.getMilliseconds()             //毫秒   
+    };
+    if (/(y+)/.test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o) {
+      if (new RegExp("(" + k + ")").test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+      }
+    }
+    return fmt;
+  }
+
   newproject = () => {
-    const projects = this.props.projects;
-    const id = projects.length > 0 ? (Math.max.apply(Math, projects.map((item) => { return item.id })) + 1) : 1;
-    const project = { id: id, title: '', text: '', image: '', tags: '&', author_id: 0, character_count: 0, update_time: '2018-01-31 18:20:20', status: 0, script: { roles: [], paragraphs: [{ id: 1, title: '段落标题', chat_id: 1, nodes: [], paragraphtxt: '' }], galleries: [] }, content: { projecttreedata: [{ id: 1, type: 'text', nextid: 0 }] } };
+    const update_time = new Date().getTime();
+    const project = { id: 0, title: '', text: '', image: '', tags: '&', author_id: 1, character_count: 0, update_time: update_time, status: 0, script: '', content: { roles: [], galleries: [], paragraphtree: [{ id: 1, type: 'text', title: '未命名段落', nextid: 0, paragraphtxt: '' }] } };
     this.props.setproject(project);
     this.props.setprojectedittype(0);
     this.props.setprojectinfoshow(true);
@@ -118,7 +124,7 @@ class Home extends Component {
       pagenationbtnsview = <div className="isnull">没有更多数据了~</div>;
     } else {
       projectsview = projects.slice(index * 4 - 4, index * 4).map((item, index) => {
-        return <Project project={item} key={item.id}></Project>
+        return <Project projectitem={item} key={item.id}></Project>
       });
 
       if (pages > 1) {
@@ -149,8 +155,8 @@ class Home extends Component {
               <div className="col-xs-6"></div>
               <div className="col-xs-4 text-center">
                 <div className="btn btn-info" onClick={this.newproject}>新建剧本</div>
-                <img className="userphoto" alt="头像" src={this.state.user.userphoto} />
-                <DropdownButton className="user" title={this.state.user.username} pullRight id="dropdown-size-medium">
+                <img className="userphoto" alt="头像" src={this.props.user.profile} />
+                <DropdownButton className="user" title={this.props.user.name} pullRight id="dropdown-size-medium">
                   <MenuItem className="text-center">个人信息</MenuItem>
                   <MenuItem className="text-center">申请签约</MenuItem>
                   <MenuItem className="text-center">投稿须知</MenuItem>
@@ -179,12 +185,12 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { projects: state.projects, user: state.user, projectinfo: state.projectinfo };
+  return { loadingshow: state.loadingshow, projects: state.projects, user: state.user, projectinfo: state.projectinfo };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setprojects: (projects) => { dispatch(actionCreater(actiontypes.SET_PROJECTS, { projects: projects })) },
+    setloadingshow: (loadingshow) => { dispatch(actionCreater(actiontypes.SET_LOADINGSHOW, { loadingshow: loadingshow })) },
     setproject: (project) => { dispatch(actionCreater(actiontypes.SET_PROJECT, { project: project })) },
     setprojectedittype: (projectedittype) => { dispatch(actionCreater(actiontypes.SET_PROJECT_EDITTYPE, { projectedittype: projectedittype })) },
     setprojectinfoshow: (projectinfoshow) => { dispatch(actionCreater(actiontypes.SET_PROJECTINFO_SHOW, { projectinfoshow: projectinfoshow })) },

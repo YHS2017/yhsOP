@@ -23,7 +23,7 @@ class ScriptEditor extends Component {
 
   newrole = () => {
     const id = this.props.project.content.roles.length > 0 ? (Math.max.apply(Math, this.props.project.content.roles.map((item) => { return item.id })) + 1) : 1;
-    const newrole = { id: id, "type": "NPC", name: "", profile: "", galleries: [] };
+    const newrole = { id: id, "type": "NPC", name: "", profile: "", gallery_ids: [] };
     this.setState({ ...this, currentrole: newrole, roleinfoshow: true, editroletype: 0 });
   }
 
@@ -48,6 +48,12 @@ class ScriptEditor extends Component {
   changerolename = (e) => {
     let currentrole = this.state.currentrole;
     currentrole.name = e.target.value;
+    this.setState({ ...this, currentrole: currentrole });
+  }
+
+  changerolephoto = (e) => {
+    let currentrole = this.state.currentrole;
+    currentrole.profile = e.target.value;
     this.setState({ ...this, currentrole: currentrole });
   }
 
@@ -114,13 +120,13 @@ class ScriptEditor extends Component {
     const rolelist = this.props.project.content.roles.map((item) => {
       return <li className="role-item" key={item.id}><img className="role-photo" alt="头像" src={item.profile === '' ? this.state.defaultimg : item.profile} /><b>{item.name}</b><span className="glyphicon glyphicon-cog role-seting"><div className="role-item-menu"><div onClick={this.newgallerygroup}>添加回忆</div><div onClick={() => { this.editrole(item.id) }}>修改信息</div><div onClick={() => { this.deleterole(item.id) }}>删除角色</div></div></span></li>
     });
-
     return (
       <div className={"rolelist " + (this.state.rolelistshow ? 'on' : 'off')}>
         <div className={"roleinfo text-center " + (this.state.roleinfoshow ? 'show' : 'hide')}>
           <img className="role-photo-upload" src={this.state.currentrole.profile === '' ? this.state.defaultimg : this.state.currentrole.profile} alt="角色头像" />
           <div className="input-group">
-            <span className="input-group-addon" >角色命名</span>
+            <span className="input-group-addon" >角色信息</span>
+            <input type="text" className="form-control" placeholder="头像链接" value={this.state.currentrole.profile} onChange={this.changerolephoto} />
             <input type="text" className="form-control" placeholder="角色名称" value={this.state.currentrole.name} onChange={this.changerolename} />
           </div>
           <span className="glyphicon glyphicon-remove close-roleinfo" onClick={this.closeroleinfo}></span>

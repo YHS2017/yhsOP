@@ -1,30 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import actiontypes from '../../actions/actiontype';
+import actionCreater from '../../actions/index';
 import '../css/Login.css';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
       username: '',
       pwd: ''
     };
   }
 
   login = () => {
-    // fetch('../../data.json').then(data => {
-    //   data.text().then(datastr => {
-    //     if (datastr === '') {
-    //       return
-    //     } else {
-    //       const data = JSON.parse(datastr);
-    //     }
-    //   })
-    // });
-    const path = "/Author/" + this.state.user.username + "/home";
-    this.props.history.push(path);
+    const setuser = this.props.setuser;
+    const settoken = this.props.settoken;
+    this.props.setloadingshow(1);
+    fetch('/source/api.php', {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: 'apipoint=login&apidata='
+    }).then(data => {
+      data.text().then(datastr => {
+        const data = JSON.parse(datastr);
+        //setuser({ id: data.UserId, name: data.UserName, profile: data.UserProfile });
+        setuser({ id: 0, name: '作者', profile: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4' });
+        settoken(data.Token);
+        fetch('/source/api.php', {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: 'apipoint=getlist&apidata='
+        }).then(data => {
+          data.text().then(datastr => {
+            this.props.setloadingshow(0);
+            const projects = JSON.parse(datastr);
+            if (projects.length === 0) {
+              return
+            } else {
+              this.props.setprojects(projects);
+              const path = "/Author/" + this.props.user.name + "/home";
+              this.props.history.push(path);
+            }
+          })
+        });
+      })
+    });
+
   }
 
   changeusername = (e) => {
@@ -64,7 +87,12 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    setloadingshow: (loadingshow) => { dispatch(actionCreater(actiontypes.SET_LOADINGSHOW, { loadingshow: loadingshow })) },
+    setprojects: (projects) => { dispatch(actionCreater(actiontypes.SET_PROJECTS, { projects: projects })) },
+    setuser: (user) => { dispatch(actionCreater(actiontypes.SET_USER, { user: user })) },
+    settoken: (token) => { dispatch(actionCreater(actiontypes.SET_TOKEN, { token: token })) }
+  }
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

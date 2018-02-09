@@ -1,8 +1,9 @@
 const initstate = {
   projects: [],
   project: {
-    id: '0',
+    id: 0,
     title: '',
+    image: '',
     text: '',
     character_count: 0,
     tags: '&',
@@ -23,16 +24,17 @@ const initstate = {
         }
       ],
     },
-    script:'',
+    script: '',
   },
   projectedittype: 0,
   projectinfoshow: false,
   currentparagraphid: 1,
   currentoptionid: 0,
+  loadingshow: 0,
   user: {
-    username: '筱申',
-    userphoto: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4',
-    userid: ''
+    name: '筱申',
+    profile: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4',
+    id: 0
   }
 }
 

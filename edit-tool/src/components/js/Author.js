@@ -9,14 +9,13 @@ class Author extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user
     };
   }
   render() {
     return (
       <div className="main">
-        <Route path={"/Author/" + this.state.user.username + "/home"} render={() => <Home></Home>} />
-        <Route path={"/Author/" + this.state.user.username + "/projecteditor"} render={() => <ProjectEditor></ProjectEditor>} />
+        <Route path={"/Author/" + this.props.user.name + "/home"} component={Home} />
+        <Route path={"/Author/" + this.props.user.name + "/projecteditor"} component={ProjectEditor} />
       </div>
     );
   }

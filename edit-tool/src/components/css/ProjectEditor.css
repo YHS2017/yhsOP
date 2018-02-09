@@ -15,6 +15,8 @@
   width: 55vw;
   height: 10vh;
   line-height: 10vh;
+  font-weight: bold;
+  font-size: 20px;
   text-align: center;
 }
 .toolbar{
@@ -22,6 +24,7 @@
   width: 30vw;
   height: 10vh;
   line-height: 10vh;
+  text-align: center;
 }
 .paragraphtree{
   position: absolute;
@@ -59,6 +62,7 @@
   box-shadow: 0 0 2px 2px #ddd;
   margin: 10px 10px 10px 200px;
   background-color: forestgreen;
+  color: #fff;
   cursor: pointer;
   text-align: center;
 }
@@ -80,8 +84,9 @@
   line-height: 50px;
   box-shadow: 0 0 2px 2px #ddd;
   margin: 10px 10px 10px 200px;
-  background-color: #fc617f;
-  color: #fff;
+  background-color: #eee;
+  color: #fc617f;
+  border:1px solid #fc617f;
   cursor: pointer;
   text-align: center;
   border-radius: 25px;
@@ -102,8 +107,12 @@
 .type-text:hover,.type-link:hover,.type-ending:hover,.type-selection:hover{
   box-shadow: 0 0 2px 2px #8ab0fa;
 }
-.type-text.current,.type-ending.current{
+.type-text.current,.type-selection.current{
   background-color: #8ab0fa;
+  color: #fff;
+}
+.type-ending.current{
+  background-color: #fc617f;
   color: #fff;
 }
 .type-text:hover .tools,.type-link:hover .tools,.type-ending:hover .tools,.type-selection:hover .tools{

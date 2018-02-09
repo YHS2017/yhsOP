@@ -10,8 +10,7 @@ class ProjectInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user,
-      projects: this.props.projects
+      defaultimg: '../../nomal.gif'
     };
   }
 
@@ -45,15 +44,32 @@ class ProjectInfo extends Component {
     this.props.setproject(project);
   }
 
+  imagechange = (e) => {
+    let project = { ...this.props.project };
+    project.image = e.target.value;
+    this.props.setproject(project);
+  }
+
   saveinfo = () => {
     //异步更新剧本列表
     let projects = [...this.props.projects];
+    const project = this.props.project;
     if (this.props.projectedittype === 0) {
-      projects.push(this.props.project);
+      projects.push(project);
       this.props.setprojects(projects);
-      this.props.setprojectinfoshow(false);
-      const path = '/Author/' + this.state.user.username + '/projecteditor';
-      this.props.history.push(path);
+      fetch('/source/api.php', {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: 'apipoint=newproject&apidata=' + encodeURIComponent(JSON.stringify(project))
+      }).then(data => {
+        data.text().then(datastr => {
+          const project = JSON.parse(datastr);
+          console.log('新增了project[' + project.title + ']');
+          this.props.setprojectinfoshow(false);
+          const path = '/Author/' + this.props.user.name + '/projecteditor';
+          this.props.history.push(path);
+        })
+      });
     } else {
       for (let i = 0; i < projects.length; i++) {
         if (projects[i].id === this.props.project.id) {
@@ -61,7 +77,17 @@ class ProjectInfo extends Component {
         }
       }
       this.props.setprojects(projects);
-      this.props.setprojectinfoshow(false);
+      fetch('/source/api.php', {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: 'apipoint=updateprojectinfo&apidata=' + encodeURIComponent(JSON.stringify(project))
+      }).then(data => {
+        data.text().then(datastr => {
+          const project = JSON.parse(datastr);
+          console.log('更新了project[' + project.title + ']');
+          this.props.setprojectinfoshow(false);
+        })
+      });
     }
   }
 
@@ -151,7 +177,12 @@ class ProjectInfo extends Component {
         </div>
         <div className="row">
           <div className="col-xs-3">封面配图</div>
-          <div className="col-xs-9"><label className="lab_upload"><FileUpload></FileUpload>140X140</label></div>
+          <div className="col-xs-9"><label className="lab_upload"><FileUpload></FileUpload><img className="scriptimage" src={project.image === '' ? this.state.defaultimg : project.image} alt="封面" /></label></div>
+        </div>
+        <div className="row">
+          <div className="col-xs-12 text-center">
+            <input type="text" className="form-control" value={project.image} onChange={this.imagechange} />
+          </div>
         </div>
         <div className="row">
           <div className="col-xs-12 text-center"><div className="btn btn-success" onClick={this.saveinfo}>确 定</div></div>
