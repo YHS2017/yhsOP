@@ -6,9 +6,9 @@ import reducer from './reducers';
 import 'bootstrap/dist/css/bootstrap.css';
 import './components/css/index.css';
 import App from './components/js/App';
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 
 let store = createStore(reducer);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
-registerServiceWorker();
+//registerServiceWorker();

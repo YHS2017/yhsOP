@@ -57,10 +57,10 @@ class ProjectInfo extends Component {
     if (this.props.projectedittype === 0) {
       projects.push(project);
       this.props.setprojects(projects);
-      fetch('/source/api.php', {
+      fetch('http://172.168.11.124:8060/v1/project/new', {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: 'apipoint=newproject&apidata=' + encodeURIComponent(JSON.stringify(project))
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(project)
       }).then(data => {
         data.text().then(datastr => {
           const project = JSON.parse(datastr);
@@ -77,10 +77,10 @@ class ProjectInfo extends Component {
         }
       }
       this.props.setprojects(projects);
-      fetch('/source/api.php', {
+      fetch('http://172.168.11.124:8060/v1/project/outline', {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: 'apipoint=updateprojectinfo&apidata=' + encodeURIComponent(JSON.stringify(project))
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(project)
       }).then(data => {
         data.text().then(datastr => {
           const project = JSON.parse(datastr);

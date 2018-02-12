@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ProjectEditor from './ProjectEditor';
 import Home from './Home';
@@ -11,11 +11,15 @@ class Author extends Component {
     this.state = {
     };
   }
+
   render() {
     return (
       <div className="main">
-        <Route path={"/Author/" + this.props.user.name + "/home"} component={Home} />
-        <Route path={"/Author/" + this.props.user.name + "/projecteditor"} component={ProjectEditor} />
+        <Switch>
+          <Route path={"/Author/" + this.props.user.name + "/home"} component={Home} />
+          <Route path={"/Author/" + this.props.user.name + "/projecteditor"} component={ProjectEditor} />
+          <Redirect to='/' />
+        </Switch>
       </div>
     );
   }

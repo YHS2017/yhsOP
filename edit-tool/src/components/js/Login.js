@@ -14,40 +14,69 @@ class Login extends Component {
     };
   }
 
+  componentWillMount() {
+    if (sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== '') {
+      const setuser = this.props.setuser;
+      const settoken = this.props.settoken;
+      setuser(JSON.parse(sessionStorage.getItem('user')));
+      settoken(JSON.parse(sessionStorage.getItem('token')));
+      fetch('http://172.168.11.124:8060/v1/project/all', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      }).then(data => {
+        data.text().then(datastr => {
+          this.props.setloadingshow(0);
+          const projects = JSON.parse(datastr);
+          if (projects.length === 0) {
+            return
+          } else {
+            this.props.setprojects(projects);
+            const path = "/Author/" + this.props.user.name + "/home";
+            this.props.history.push(path);
+          }
+        })
+      });
+    }
+  }
+
   login = () => {
     const setuser = this.props.setuser;
     const settoken = this.props.settoken;
     this.props.setloadingshow(1);
-    fetch('/source/api.php', {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: 'apipoint=login&apidata='
-    }).then(data => {
-      data.text().then(datastr => {
-        const data = JSON.parse(datastr);
-        //setuser({ id: data.UserId, name: data.UserName, profile: data.UserProfile });
-        setuser({ id: 0, name: '作者', profile: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4' });
-        settoken(data.Token);
-        fetch('/source/api.php', {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: 'apipoint=getlist&apidata='
-        }).then(data => {
-          data.text().then(datastr => {
-            this.props.setloadingshow(0);
-            const projects = JSON.parse(datastr);
-            if (projects.length === 0) {
-              return
-            } else {
-              this.props.setprojects(projects);
-              const path = "/Author/" + this.props.user.name + "/home";
-              this.props.history.push(path);
-            }
-          })
-        });
-      })
-    });
-
+    if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === '') {
+      fetch('http://172.168.11.124:8060/v1/auth/login', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: ''
+      }).then(data => {
+        data.text().then(datastr => {
+          const data = JSON.parse(datastr);
+          const user = { id: 0, name: '作者', profile: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4' };
+          //const user = { id: data.user_id, name: data.user_name, profile: data.user_profile };
+          const token = data.token;
+          sessionStorage.setItem('user', JSON.stringify(user));
+          sessionStorage.setItem('token', JSON.stringify(token));
+          setuser(user);
+          settoken(token);
+          fetch('http://172.168.11.124:8060/v1/project/all', {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+          }).then(data => {
+            data.text().then(datastr => {
+              this.props.setloadingshow(0);
+              const projects = JSON.parse(datastr);
+              if (projects.length === 0) {
+                return
+              } else {
+                this.props.setprojects(projects);
+                const path = "/Author/" + this.props.user.name + "/home";
+                this.props.history.push(path);
+              }
+            })
+          });
+        })
+      });
+    }
   }
 
   changeusername = (e) => {

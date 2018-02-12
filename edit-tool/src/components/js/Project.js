@@ -16,10 +16,9 @@ class Project extends Component {
   toprojectedit = (id) => {
     //异步获取剧本内容
     this.props.setloadingshow(1);
-    fetch('/source/api.php', {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: 'apipoint=getproject&apidata=' + id
+    fetch('http://172.168.11.124:8060/v1/project/' + id, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
     }).then(data => {
       data.text().then(datastr => {
         this.props.setloadingshow(0);
@@ -147,7 +146,7 @@ class Project extends Component {
       }
       formatdata = { nodes: nodes, galleryitems: galleryitems };
     }
-    console.log(formatdata);
+    // console.log(formatdata);
     return formatdata;
   }
 
@@ -157,50 +156,77 @@ class Project extends Component {
     let paragraphs = [];
     let tempseletion = null;
     this.props.setloadingshow(1);
-    fetch('/source/api.php', {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: 'apipoint=getproject&apidata=' + id
+    fetch('http://172.168.11.124:8060/v1/project/' + id, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
     }).then(data => {
       data.text().then(datastr => {
         project = JSON.parse(datastr);
         project.content = JSON.parse(project.content);
         this.props.setproject(project);
         this.props.setprojectedittype(1);
+        //清空galleries的items
+        for (let i = 0; i < project.content.galleries.length; i++) {
+          project.content.galleries[i].items = [];
+        }
+        //生成script
         for (let i = 0; i < project.content.paragraphtree.length; i++) {
-          let paragraph = {};
           if (project.content.paragraphtree[i].type === 'select') {
             if (tempseletion === null) {
               tempseletion = {};
               tempseletion.id = project.content.paragraphtree[i].id;
               tempseletion.title = '';
-              tempseletion.chat_id = parseInt(project.content.paragraphtree[i].chat_id);
+              tempseletion.chat_id = parseInt(project.content.paragraphtree[i].chat_id,10);
               tempseletion.nodes = [{ type: 'Selection', selections: [] }];
               tempseletion.nodes[0].selections.push({ text: project.content.paragraphtree[i].title, next_paragraph_id: project.content.paragraphtree[i].nextid });
             } else if (tempseletion.id === project.content.paragraphtree[i].id) {
               tempseletion.nodes[0].selections.push({ text: project.content.paragraphtree[i].title, next_paragraph_id: project.content.paragraphtree[i].nextid });
             }
           } else {
+            //选项结束
+            if (tempseletion !== null) {
+              paragraphs.push({ ...tempseletion });
+              tempseletion = null;
+            }
+            let paragraph = {};
             const formatdata = this.formatparagraphtxt(project.content.paragraphtree[i].paragraphtxt);
             if (formatdata === null) {
               console.log('有空段落[' + project.content.paragraphtree[i].title + ']存在，请先前往编辑！');
               return;
             }
+            //添加items
             for (let j = 0; j < formatdata.galleryitems.length; j++) {
               for (let t = 0; t < project.content.galleries.length; t++) {
                 if (formatdata.galleryitems[j].gallery_id === project.content.galleries[t].id) {
-                  project.content.galleries[t].items.push({ ...formatdata.galleryitems[j].item });
-                  break;
+                  let existed = false;
+                  for (let r = 0; r < project.content.galleries[t].items.length; r++) {
+                    if (project.content.galleries[t].items[r].type === 'GalleryItemImage') {
+                      if (project.content.galleries[t].items[r].image === formatdata.galleryitems[j].item.image) {
+                        existed = true;
+                        break;
+                      }
+                    } else if (project.content.galleries[t].items[r].type === 'GalleryItemVideo') {
+                      if (project.content.galleries[t].items[r].video === formatdata.galleryitems[j].item.video) {
+                        existed = true;
+                        break;
+                      }
+                    } else {
+                      if (project.content.galleries[t].items[r].title === formatdata.galleryitems[j].item.title) {
+                        existed = true;
+                        break;
+                      }
+                    }
+                  }
+                  if (!existed) {
+                    project.content.galleries[t].items.push({ ...formatdata.galleryitems[j].item });
+                    break;
+                  }
                 }
               }
             }
-            if (tempseletion !== null) {
-              paragraphs.push({ ...tempseletion });
-              tempseletion = null;
-            }
             paragraph.id = project.content.paragraphtree[i].id;
             paragraph.title = project.content.paragraphtree[i].title;
-            paragraph.chat_id = parseInt(project.content.paragraphtree[i].chat_id);
+            paragraph.chat_id = parseInt(project.content.paragraphtree[i].chat_id,10);
             if (project.content.paragraphtree[i].type === 'text') {
               paragraph.nodes = [...formatdata.nodes];
               for (let j = 0; j < project.content.paragraphtree.length; j++) {
@@ -216,8 +242,8 @@ class Project extends Component {
               paragraph.nodes = [...formatdata.nodes];
               paragraph.nodes[paragraph.nodes.length - 1].next_paragraph_id = project.content.paragraphtree[i].nextid;
             }
+            paragraphs.push(paragraph);
           }
-          paragraphs.push(paragraph);
         }
         for (let i = 0; i < project.content.roles.length; i++) {
           let gallery_ids = [];
@@ -236,24 +262,21 @@ class Project extends Component {
         console.log(script);
         project.script = JSON.stringify(script);
         project.content = JSON.stringify(project.content);
-        console.log(JSON.stringify(project));
+        console.log(project);
         //更新生成script的project
-        fetch('/source/api.php', {
+        fetch('http://172.168.11.124:8060/v1/project/', {
           method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: 'apipoint=updateproject&apidata=' + encodeURIComponent(JSON.stringify(project))
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(project)
         }).then(data => {
           data.text().then(datastr => {
-            const project = JSON.parse(datastr);
             console.log('更新生成script的project[' + project.title + ']成功');
-            fetch('/source/api.php', {
-              method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: 'apipoint=releaseproject&apidata=' + id
+            fetch('http://172.168.11.124:8060/v1/project/commit/' + id, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" }
             }).then(data => {
               data.text().then(datastr => {
                 this.props.setloadingshow(0);
-                const project = JSON.parse(datastr);
                 console.log('发布了project[' + project.title + ']');
               });
             });

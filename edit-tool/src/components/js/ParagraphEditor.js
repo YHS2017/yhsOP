@@ -33,7 +33,7 @@ class ParagraphEditor extends Component {
     let project = { ...this.props.project };
     for (let i = 0; i < project.content.paragraphtree.length; i++) {
       if (project.content.paragraphtree[i].id === currentparagraphid) {
-        project.content.paragraphtree[i].chat_id = parseInt(e.target.value);
+        project.content.paragraphtree[i].chat_id = parseInt(e.target.value,10);
         this.props.setproject(project);
       }
     }

@@ -349,10 +349,10 @@ class ProjectEditor extends Component {
   saveproject = () => {
     let project = { ...this.props.project, content: JSON.stringify(this.props.project.content) };
     this.props.setloadingshow(1);
-    fetch('/source/api.php', {
+    fetch('http://172.168.11.124:8060/v1/project/', {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: 'apipoint=updateproject&apidata=' + encodeURIComponent(JSON.stringify(project))
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(project)
     }).then(data => {
       data.text().then(datastr => {
         this.props.setloadingshow(0);

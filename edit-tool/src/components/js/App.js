@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Author from './Author';
 import Login from './Login';
 import '../css/App.css';
@@ -17,13 +17,16 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="/login" component={Login} />
-          <Route path="/Author" component={Author} />
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route path="/Author" component={Author} />
+            <Redirect to='/' />
+          </Switch>
           <div className={"mo " + (this.props.loadingshow === 0 ? '' : 'show')}>
-            <img src="../../loading.gif" />
+            <img src="../../loading.gif" alt="loading" />
           </div>
         </div>
-      </Router >
+      </Router>
     );
   }
 }
