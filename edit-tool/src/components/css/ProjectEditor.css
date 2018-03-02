@@ -32,35 +32,39 @@
   left: 0;
   width: 100%;
   height: 90vh;
-  padding: 0 0 150px 0;
   background-color: #fff;
-  overflow: auto;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  overflow: hidden;
 }
 .type-text{
   position: relative;
-  width: 160px;
-  height: 50px;
-  line-height: 50px;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
   box-shadow: 0 0 2px 2px #ddd;
-  margin: 10px 10px 10px 200px;
+  margin: 5px;
+  margin-left: 5000px;
   background-color: #eee;
   cursor: pointer;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 5px;
 }
 .text-title{
   width: 100%;
   height: 100%;
-  line-height: 50px;
+  line-height: 40px;
   text-align: center;
 }
 .type-selection{
   position: relative;
-  width: 160px;
-  height: 50px;
-  line-height: 50px;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
   box-shadow: 0 0 2px 2px #ddd;
-  margin: 10px 10px 10px 200px;
+  margin: 5px;
+  margin-left: 5000px;
   background-color: forestgreen;
   color: #fff;
   cursor: pointer;
@@ -68,10 +72,11 @@
 }
 .type-link{
   position: relative;
-  width: 160px;
-  height: 50px;
-  line-height: 50px;
-  margin: 10px 10px 10px 200px;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  margin-left: 5000px;
   border: 2px dotted #999;
   text-align: center;
   cursor: pointer;
@@ -79,23 +84,24 @@
 }
 .type-ending{
   position: relative;
-  width: 160px;
-  height: 50px;
-  line-height: 50px;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
   box-shadow: 0 0 2px 2px #ddd;
-  margin: 10px 10px 10px 200px;
+  margin: 5px;
+  margin-left: 5000px;
   background-color: #eee;
   color: #fc617f;
   border:1px solid #fc617f;
   cursor: pointer;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 5px;
 }
 .tools{
   position: absolute;
   width: 100%;
   top: 0;
-  left: 160px;
+  left: 120px;
   display: none;
   text-align: center;
   z-index: 100;
@@ -118,15 +124,6 @@
 .type-text:hover .tools,.type-link:hover .tools,.type-ending:hover .tools,.type-selection:hover .tools{
   display: block;
 }
-.type-selection input{
-  width: 150px;
-  height: 30px;
-  margin: 10px 5px;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  text-align: center;
-}
 .selecttionnum{
   position: fixed;
   top: 50%;
@@ -147,4 +144,20 @@
 }
 .selecttionnum .btn-success{
   margin: 5px 0;
+}
+.treecontent{
+    position: absolute;
+    width: 10000px;
+    height: 10000px;
+    top: 0px;
+    left: -4500px;
+    cursor: -webkit-grab;
+    transform-origin: top;
+    z-index: 1;
+}
+.treecontent svg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }

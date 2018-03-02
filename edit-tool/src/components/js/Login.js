@@ -9,18 +9,45 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      pwd: ''
+      AppID: 'wxa8db9d8cb328d179',
+      AppSecret: '92e660432d2d877693d7511f53cb3928',
+      redirect_uri: 'http%3a%2f%2fweixin.91smart.net'
     };
   }
 
   componentWillMount() {
+    const setuser = this.props.setuser;
+    const settoken = this.props.settoken;
+
+    //test--------------------------
     if (sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== '') {
-      const setuser = this.props.setuser;
-      const settoken = this.props.settoken;
       setuser(JSON.parse(sessionStorage.getItem('user')));
       settoken(JSON.parse(sessionStorage.getItem('token')));
-      fetch('http://172.168.11.124:8060/v1/project/all', {
+      fetch('http://weixin.91smart.net/v1/project/all', {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      }).then(data => {
+        data.text().then(datastr => {
+          this.props.setloadingshow(0);
+          const projects = JSON.parse(datastr);
+          if (projects.length === 0) {
+            return
+          } else {
+            this.props.setprojects(projects);
+            const path = "/Author/" + this.props.user.name + "/home";
+            this.props.history.push(path);
+          }
+        })
+      });
+    } else 
+    {
+      const user = { id: 0, name: '作者', profile: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4' };
+      const token = 'token';
+      sessionStorage.setItem('user', JSON.stringify(user));
+      sessionStorage.setItem('token', JSON.stringify(token));
+      setuser(user);
+      settoken(token);
+      fetch('http://weixin.91smart.net/v1/project/all', {
         method: "GET",
         headers: { "Content-Type": "application/json" }
       }).then(data => {
@@ -37,76 +64,90 @@ class Login extends Component {
         })
       });
     }
+    //---------------------------
+
+
+    // if (sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== '') {
+    //   setuser(JSON.parse(sessionStorage.getItem('user')));
+    //   settoken(JSON.parse(sessionStorage.getItem('token')));
+    //   fetch('http://weixin.91smart.net/v1/project/all', {
+    //     method: "GET",
+    //     headers: { "Content-Type": "application/json" }
+    //   }).then(data => {
+    //     data.text().then(datastr => {
+    //       this.props.setloadingshow(0);
+    //       const projects = JSON.parse(datastr);
+    //       if (projects.length === 0) {
+    //         return
+    //       } else {
+    //         this.props.setprojects(projects);
+    //         const path = "/Author/" + this.props.user.name + "/home";
+    //         this.props.history.push(path);
+    //       }
+    //     })
+    //   });
+    // } else {
+    //   let parsestr = window.location.search;
+    //   if (parsestr === undefined || parsestr.indexOf('code=') === -1) {
+    //     const path = 'https://open.weixin.qq.com/connect/qrconnect?appid=' + this.state.AppID + '&redirect_uri=' + this.state.redirect_uri + '&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect'
+    //     window.location = path;
+    //   } else {
+    //     let code = this.getparses(window.location.search).code;
+    //     fetch('http://weixin.91smart.net/v1/auth/login?code=' + code, {
+    //       method: "POST",
+    //       headers: { "Content-Type": "application/json" },
+    //       body: ''
+    //     }).then(data => {
+    //       data.text().then(datastr => {
+    //         const data = JSON.parse(datastr);
+    //         const user = { id: 0, name: '作者', profile: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4' };
+    //         //const user = { id: data.user_id, name: data.user_name, profile: data.user_profile };
+    //         const token = data.token;
+    //         sessionStorage.setItem('user', JSON.stringify(user));
+    //         sessionStorage.setItem('token', JSON.stringify(token));
+    //         setuser(user);
+    //         settoken(token);
+    //         fetch('http://weixin.91smart.net/v1/project/all', {
+    //           method: "GET",
+    //           headers: { "Content-Type": "application/json" }
+    //         }).then(data => {
+    //           data.text().then(datastr => {
+    //             this.props.setloadingshow(0);
+    //             const projects = JSON.parse(datastr);
+    //             if (projects.length === 0) {
+    //               return
+    //             } else {
+    //               this.props.setprojects(projects);
+    //               const path = "/Author/" + this.props.user.name + "/home";
+    //               this.props.history.push(path);
+    //             }
+    //           })
+    //         });
+    //       })
+    //     });
+    //   }
+    // }
   }
 
-  login = () => {
-    const setuser = this.props.setuser;
-    const settoken = this.props.settoken;
-    this.props.setloadingshow(1);
-    if (sessionStorage.getItem('user') === null || sessionStorage.getItem('user') === '') {
-      fetch('http://172.168.11.124:8060/v1/auth/login', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: ''
-      }).then(data => {
-        data.text().then(datastr => {
-          const data = JSON.parse(datastr);
-          const user = { id: 0, name: '作者', profile: 'https://avatars0.githubusercontent.com/u/24862812?s=40&v=4' };
-          //const user = { id: data.user_id, name: data.user_name, profile: data.user_profile };
-          const token = data.token;
-          sessionStorage.setItem('user', JSON.stringify(user));
-          sessionStorage.setItem('token', JSON.stringify(token));
-          setuser(user);
-          settoken(token);
-          fetch('http://172.168.11.124:8060/v1/project/all', {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-          }).then(data => {
-            data.text().then(datastr => {
-              this.props.setloadingshow(0);
-              const projects = JSON.parse(datastr);
-              if (projects.length === 0) {
-                return
-              } else {
-                this.props.setprojects(projects);
-                const path = "/Author/" + this.props.user.name + "/home";
-                this.props.history.push(path);
-              }
-            })
-          });
-        })
+  getparses = (str) => {
+    var url = window.location.search;
+    var obj = {};
+    var reg = /[?&][^?&]+=[^?&]+/g;
+    var arr = str.match(reg);
+    if (arr) {
+      arr.forEach(function (item) {
+        var tempArr = item.substring(1).split('=');
+        var key = decodeURIComponent(tempArr[0]);
+        var val = decodeURIComponent(tempArr[1]);
+        obj[key] = val;
       });
     }
-  }
-
-  changeusername = (e) => {
-    this.setState({ ...this, username: e.target.value });
-  }
-
-  changepwd = (e) => {
-    this.setState({ ...this, pwd: e.target.value });
+    return obj;
   }
 
   render() {
     return (
-      <div className="container">
-        <div className="loginbox">
-          <h3>用户登录</h3>
-          <div className="form-group">
-            <label className="col-xs-3 control-label">用户名</label>
-            <div className="col-xs-9">
-              <input type="text" className="form-control" placeholder="请输入用户名" onChange={this.changeusername} value={this.state.username} />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-xs-3 control-label">密码</label>
-            <div className="col-xs-9">
-              <input type="password" className="form-control" placeholder="请输入密码" onChange={this.changepwd} value={this.state.pwd} />
-            </div>
-          </div>
-          <div className="btn btn-success loginbtn" onClick={this.login}>登录</div>
-        </div>
-      </div>
+      <div className="loginbox">Loding.........</div>
     );
   }
 }

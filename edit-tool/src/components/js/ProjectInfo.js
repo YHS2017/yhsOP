@@ -7,12 +7,9 @@ import FileUpload from './FileUpload';
 import '../css/ProjectInfo.css';
 
 class ProjectInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      defaultimg: '../../nomal.gif'
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   tagschange = (e) => {
     let project = { ...this.props.project };
@@ -25,7 +22,7 @@ class ProjectInfo extends Component {
     }
   }
 
-  othertags = (e) => {
+  othertags(e) {
     let project = { ...this.props.project };
     const nowother = project.tags.split('&')[1];
     project.tags = project.tags.replace('&' + nowother, '&' + e.target.value);
@@ -50,14 +47,21 @@ class ProjectInfo extends Component {
     this.props.setproject(project);
   }
 
+  getuploadurl = (url) => {
+    let project = { ...this.props.project };
+    project.image = url;
+    this.props.setproject(project);
+  }
+
   saveinfo = () => {
     //异步更新剧本列表
     let projects = [...this.props.projects];
-    const project = this.props.project;
+    let project = { ...this.props.project };
     if (this.props.projectedittype === 0) {
       projects.push(project);
       this.props.setprojects(projects);
-      fetch('http://172.168.11.124:8060/v1/project/new', {
+      project.content = JSON.stringify(project.content);
+      fetch('http://weixin.91smart.net/v1/project/new', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(project)
@@ -77,7 +81,7 @@ class ProjectInfo extends Component {
         }
       }
       this.props.setprojects(projects);
-      fetch('http://172.168.11.124:8060/v1/project/outline', {
+      fetch('http://weixin.91smart.net/v1/project/outline', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(project)
@@ -177,7 +181,7 @@ class ProjectInfo extends Component {
         </div>
         <div className="row">
           <div className="col-xs-3">封面配图</div>
-          <div className="col-xs-9"><label className="lab_upload"><FileUpload></FileUpload><img className="scriptimage" src={project.image === '' ? this.state.defaultimg : project.image} alt="封面" /></label></div>
+          <div className="col-xs-9"><FileUpload getuploadurl={this.getuploadurl.bind(this)} src={project.image}></FileUpload></div>
         </div>
         <div className="row">
           <div className="col-xs-12 text-center">

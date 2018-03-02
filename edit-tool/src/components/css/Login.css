@@ -1,16 +1,6 @@
 .loginbox{
-  position: fixed;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   text-align: center;
-  top: 50%;
-  left: 50%;
-  width: 300px;
-  height: 200px;
-  box-shadow: 0 0 3px 3px #ccc;
-  background-color: #eee;
-  margin: -100px 0 0 -150px;
-  border-radius: 5px;
-}
-.btn.loginbtn{
-  margin: 20px;
-  width: 100px;
 }

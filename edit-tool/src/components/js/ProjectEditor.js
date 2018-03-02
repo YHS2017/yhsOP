@@ -15,7 +15,16 @@ class ProjectEditor extends Component {
       pid: 0,
       waitlink: false,
       selections: 2,
-      selectionnumshow: false
+      selectionnumshow: false,
+      top: '0px',
+      left: '-4500px',
+      stop: '0px',
+      sleft: '-4500px',
+      sx: 0,
+      xy: 0,
+      candrag: false,
+      scale: 1,
+      editorshow: false
     };
   }
 
@@ -51,7 +60,8 @@ class ProjectEditor extends Component {
     this.setState({ ...this, waitlink: true, pid: id });
   }
 
-  toaddlink = (item) => {
+  toaddlink = (e, item) => {
+    e.stopPropagation();
     if (this.state.waitlink) {
       let project = { ...this.props.project };
       let paragraphtree = [...this.props.project.content.paragraphtree];
@@ -79,6 +89,7 @@ class ProjectEditor extends Component {
       } else {
         this.props.setcurrentparagraphid(item.id);
       }
+      this.setState({ ...this, editorshow: true });
     }
   }
 
@@ -321,17 +332,8 @@ class ProjectEditor extends Component {
     this.props.setproject(project);
   }
 
-  changeoptiontext = (e, item) => {
-    let project = { ...this.props.project };
-    let paragraphtree = [...this.props.project.content.paragraphtree];
-    for (let i = 0; i < paragraphtree.length; i++) {
-      if (paragraphtree[i].id === item.id && paragraphtree[i].optionid === item.optionid) {
-        paragraphtree[i].title = e.target.value;
-        project.content.paragraphtree = paragraphtree;
-        this.props.setproject(project);
-        break;
-      }
-    }
+  hideeditor = () => {
+    this.setState({ ...this, editorshow: false });
   }
 
   hideselectionnum = () => {
@@ -349,7 +351,7 @@ class ProjectEditor extends Component {
   saveproject = () => {
     let project = { ...this.props.project, content: JSON.stringify(this.props.project.content) };
     this.props.setloadingshow(1);
-    fetch('http://172.168.11.124:8060/v1/project/', {
+    fetch('http://weixin.91smart.net/v1/project/', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(project)
@@ -362,6 +364,32 @@ class ProjectEditor extends Component {
     });
   }
 
+  ondown = (e) => {
+    this.setState({ ...this, sx: e.screenX, sy: e.screenY, candrag: true });
+  }
+
+  onmove = (e) => {
+    if (this.state.candrag) {
+      let nowleft = e.screenX - this.state.sx + parseInt(this.state.sleft, 10) + 'px';
+      let nowtop = Math.min(e.screenY - this.state.sy + parseInt(this.state.stop, 10), 0) + 'px';
+      this.setState({ ...this, top: nowtop, left: nowleft });
+    }
+  }
+
+  onup = (e) => {
+    this.setState({ ...this, candrag: false, sleft: this.state.left, stop: this.state.top });
+  }
+
+  onscorll = (e) => {
+    let scale = this.state.scale;
+    if (e.deltaY < 0) {
+      scale = Math.min(1.8, scale + 0.1);
+    } else {
+      scale = Math.max(0.2, scale - 0.1);
+    }
+    this.setState({ ...this, scale: scale });
+  }
+
   render() {
     const currentid = this.props.currentparagraphid;
     const currentoptionid = this.props.currentoptionid;
@@ -372,7 +400,7 @@ class ProjectEditor extends Component {
           if (item.id === 1) {
             temp =
               <div className={"type-text " + (item.id === currentid ? 'current' : '')} key={item.id + '' + key}>
-                <div className="text-title" onClick={() => { this.toaddlink(item) }}>{item.title}</div>
+                <div className="text-title" onClick={(e) => { this.toaddlink(e,item) }}>{item.title}</div>
                 <div className="tools">
                   <div className="btn btn-default" onClick={() => { this.addparagraph(item) }}>段落</div>
                   <div className="btn btn-default" onClick={() => { this.addselect(item.id) }}>选项</div>
@@ -383,7 +411,7 @@ class ProjectEditor extends Component {
           } else {
             temp =
               <div className={"type-text " + (item.id === currentid ? 'current' : '')} key={item.id + '' + key}>
-                <div className="text-title" onClick={() => { this.toaddlink(item) }}>{item.title}</div>
+                <div className="text-title" onClick={(e) => { this.toaddlink(e,item) }}>{item.title}</div>
                 <div className="tools">
                   <div className="btn btn-default" onClick={() => { this.addparagraph(item) }}>段落</div>
                   <div className="btn btn-default" onClick={() => { this.addselect(item.id) }}>选项</div>
@@ -397,7 +425,7 @@ class ProjectEditor extends Component {
           if (item.id === 1) {
             temp =
               <div className={"type-text " + (item.id === currentid ? 'current' : '')} key={item.id + '' + key}>
-                <div className="text-title" onClick={() => { this.toaddlink(item) }}>{item.title}</div>
+                <div className="text-title" onClick={(e) => { this.toaddlink(e,item) }}>{item.title}</div>
                 <div className="tools">
                   <div className="btn btn-default" onClick={() => { this.addparagraph(item) }}>段落</div>
                   <div className="btn btn-default" onClick={() => { this.addselect(item.id) }}>选项</div>
@@ -406,7 +434,7 @@ class ProjectEditor extends Component {
           } else {
             temp =
               <div className={"type-text " + (item.id === currentid ? 'current' : '')} key={item.id + '' + key}>
-                <div className="text-title" onClick={() => { this.toaddlink(item) }}>{item.title}</div>
+                <div className="text-title" onClick={(e) => { this.toaddlink(e,item) }}>{item.title}</div>
                 <div className="tools">
                   <div className="btn btn-default" onClick={() => { this.addparagraph(item) }}>段落</div>
                   <div className="btn btn-default" onClick={() => { this.addselect(item.id) }}>选项</div>
@@ -425,7 +453,7 @@ class ProjectEditor extends Component {
       } else if (item.type === 'ending') {
         temp =
           <div className={"type-ending " + (item.id === currentid ? 'current' : '')} key={item.id + '' + key}>
-            <div className="text-title" onClick={() => { this.toaddlink(item) }}>{item.title}</div>
+            <div className="text-title" onClick={(e) => { this.toaddlink(e,item) }}>{item.title}</div>
             <div className="tools">
               <div className="btn btn-default" title="删除会删除段落所有内容" onClick={() => { this.todelete(item) }}>删除</div>
             </div>
@@ -433,7 +461,7 @@ class ProjectEditor extends Component {
       } else if (item.type === 'select') {
         temp =
           <div className={"type-selection " + (item.id === currentid && item.optionid === currentoptionid ? 'current' : '')} key={item.id + '' + key}>
-            <div className="selection-title" onClick={() => { this.toaddlink(item) }}>{item.title}</div>
+            <div className="selection-title" onClick={(e) => { this.toaddlink(e,item) }}>{item.title}</div>
             <div className="tools">
               <div className="btn btn-default" onClick={() => { this.addparagraph(item) }}>段落</div>
               <div className="btn btn-default" title="删除选项会删除选项下的所有内容" onClick={() => { this.todelete(item) }}>删除</div>
@@ -466,9 +494,12 @@ class ProjectEditor extends Component {
             </div>
             <div className="btn btn-success" onClick={this.toaddselect}>确定</div>
           </div>
-          {tree}
+          <div className="treecontent" onClick={this.hideeditor} style={{ top: this.state.top, left: this.state.left, transform: 'scale(' + this.state.scale + ')' }} onMouseMove={this.onmove} onWheel={this.onscorll} onMouseDown={this.ondown} onMouseUp={this.onup}>
+            {tree}
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
         </div>
-        <ParagraphEditor></ParagraphEditor>
+        <ParagraphEditor editorshow={this.state.editorshow}></ParagraphEditor>
       </div>
     );
   }

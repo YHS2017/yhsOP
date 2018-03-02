@@ -20,7 +20,10 @@ const initstate = {
           title: "未命名段落",
           chat_id: 0,
           paragraphtxt: "",
-          nextid: 0
+          nextid: 0,
+          treeid: '1',
+          x: 5100,
+          y: 100
         }
       ],
     },

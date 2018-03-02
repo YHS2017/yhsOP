@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import actiontypes from '../../actions/actiontype';
 import actionCreater from '../../actions/index';
+import FileUpload from './FileUpload';
 import '../css/RoleList.css';
 
 
@@ -16,8 +17,7 @@ class ScriptEditor extends Component {
       roleinfoshow: false,
       editgallerytype: 0,
       currentgallery: { id: 1, title: '图片', items: [] },
-      gallerygroupinfoshow: false,
-      defaultimg: '../../nomal.gif'
+      gallerygroupinfoshow: false
     }
   }
 
@@ -54,6 +54,12 @@ class ScriptEditor extends Component {
   changerolephoto = (e) => {
     let currentrole = this.state.currentrole;
     currentrole.profile = e.target.value;
+    this.setState({ ...this, currentrole: currentrole });
+  }
+
+  getuploadurl = (url) => {
+    let currentrole = this.state.currentrole;
+    currentrole.profile = url;
     this.setState({ ...this, currentrole: currentrole });
   }
 
@@ -118,12 +124,12 @@ class ScriptEditor extends Component {
 
   render() {
     const rolelist = this.props.project.content.roles.map((item) => {
-      return <li className="role-item" key={item.id}><img className="role-photo" alt="头像" src={item.profile === '' ? this.state.defaultimg : item.profile} /><b>{item.name}</b><span className="glyphicon glyphicon-cog role-seting"><div className="role-item-menu"><div onClick={this.newgallerygroup}>添加回忆</div><div onClick={() => { this.editrole(item.id) }}>修改信息</div><div onClick={() => { this.deleterole(item.id) }}>删除角色</div></div></span></li>
+      return <li className="role-item" key={item.id}><img className="role-photo" alt="头像" src={item.profile === '' ? this.state.defaultimg : item.profile + '?imageView2/2/w/400/q/85!'} /><b>{item.name}</b><span className="glyphicon glyphicon-cog role-seting"><div className="role-item-menu"><div onClick={this.newgallerygroup}>添加回忆</div><div onClick={() => { this.editrole(item.id) }}>修改信息</div><div onClick={() => { this.deleterole(item.id) }}>删除角色</div></div></span></li>
     });
     return (
       <div className={"rolelist " + (this.state.rolelistshow ? 'on' : 'off')}>
         <div className={"roleinfo text-center " + (this.state.roleinfoshow ? 'show' : 'hide')}>
-          <img className="role-photo-upload" src={this.state.currentrole.profile === '' ? this.state.defaultimg : this.state.currentrole.profile} alt="角色头像" />
+          <FileUpload getuploadurl={this.getuploadurl.bind(this)} src={this.state.currentrole.profile}></FileUpload>
           <div className="input-group">
             <span className="input-group-addon" >角色信息</span>
             <input type="text" className="form-control" placeholder="头像链接" value={this.state.currentrole.profile} onChange={this.changerolephoto} />

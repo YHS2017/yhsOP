@@ -16,7 +16,7 @@ class Project extends Component {
   toprojectedit = (id) => {
     //异步获取剧本内容
     this.props.setloadingshow(1);
-    fetch('http://172.168.11.124:8060/v1/project/' + id, {
+    fetch('http://weixin.91smart.net/v1/project/' + id, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     }).then(data => {
@@ -156,7 +156,7 @@ class Project extends Component {
     let paragraphs = [];
     let tempseletion = null;
     this.props.setloadingshow(1);
-    fetch('http://172.168.11.124:8060/v1/project/' + id, {
+    fetch('http://weixin.91smart.net/v1/project/' + id, {
       method: "GET",
       headers: { "Content-Type": "application/json" }
     }).then(data => {
@@ -176,7 +176,7 @@ class Project extends Component {
               tempseletion = {};
               tempseletion.id = project.content.paragraphtree[i].id;
               tempseletion.title = '';
-              tempseletion.chat_id = parseInt(project.content.paragraphtree[i].chat_id,10);
+              tempseletion.chat_id = parseInt(project.content.paragraphtree[i].chat_id, 10);
               tempseletion.nodes = [{ type: 'Selection', selections: [] }];
               tempseletion.nodes[0].selections.push({ text: project.content.paragraphtree[i].title, next_paragraph_id: project.content.paragraphtree[i].nextid });
             } else if (tempseletion.id === project.content.paragraphtree[i].id) {
@@ -226,7 +226,7 @@ class Project extends Component {
             }
             paragraph.id = project.content.paragraphtree[i].id;
             paragraph.title = project.content.paragraphtree[i].title;
-            paragraph.chat_id = parseInt(project.content.paragraphtree[i].chat_id,10);
+            paragraph.chat_id = parseInt(project.content.paragraphtree[i].chat_id, 10);
             if (project.content.paragraphtree[i].type === 'text') {
               paragraph.nodes = [...formatdata.nodes];
               for (let j = 0; j < project.content.paragraphtree.length; j++) {
@@ -264,14 +264,14 @@ class Project extends Component {
         project.content = JSON.stringify(project.content);
         console.log(project);
         //更新生成script的project
-        fetch('http://172.168.11.124:8060/v1/project/', {
+        fetch('http://weixin.91smart.net/v1/project/', {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(project)
         }).then(data => {
           data.text().then(datastr => {
             console.log('更新生成script的project[' + project.title + ']成功');
-            fetch('http://172.168.11.124:8060/v1/project/commit/' + id, {
+            fetch('http://weixin.91smart.net/v1/project/commit/' + id, {
               method: "GET",
               headers: { "Content-Type": "application/json" }
             }).then(data => {
@@ -291,7 +291,7 @@ class Project extends Component {
     return (
       <div className="container project">
         <div className="row">
-          <div className="col-xs-2"><img className="project_pic" src={project.image === '' ? this.state.defaultimg : project.image} alt="封面" /></div>
+          <div className="col-xs-2"><img className="project_pic" src={project.image === '' ? this.state.defaultimg : project.image + '?imageView2/2/w/400/q/85!'} alt="封面" /></div>
           <div className="col-xs-3"><h3>{project.title}</h3><p>{(project.character_count / 10000).toFixed(1)}万字</p><p>{project.tags.replace('&', '')}</p></div>
           <div className="col-xs-2"><p>阅读：0</p><p>点赞：0</p><p>评论：0</p><p>打赏：0</p></div>
           <div className="col-xs-2 status">{project.status}</div>

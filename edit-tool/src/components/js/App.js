@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Author from './Author';
 import Login from './Login';
+import SVGTEST from './SVGtest';
 import '../css/App.css';
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route path="/Author" component={Author} />
+            <Route path="/SVGTEST" component={SVGTEST} />
             <Redirect to='/' />
           </Switch>
           <div className={"mo " + (this.props.loadingshow === 0 ? '' : 'show')}>

@@ -147,11 +147,11 @@
   padding: 10px;
   background-color: #fff;
 }
-.role-photo-upload{
+.roleinfo .uploadbox{
   width: 120px;
   height: 120px;
   border-radius: 60px;
-  margin: 20px 0;
+  margin: 20px auto;
 }
 .btn.save-roleinfo{
   min-width: 120px;

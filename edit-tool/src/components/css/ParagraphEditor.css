@@ -3,22 +3,44 @@
   top: 10vh;
   height: 90vh;
   right: 0;
-  width: 400px;
-  border:1px solid #ddd;
+  border: 1px solid #ddd;
   background-color: #fff;
+  z-index: 100;
+  overflow: hidden;
+  margin-left: 50px;
 }
-.paragrapheditor .noresize{
+.paragrapheditor .editor{
   box-sizing: border-box;
   padding: 5px;
   border: none;
   outline: none;
   width: 100%;
-  height: 75vh;
-  border-top:1px solid #ddd;
-  word-break:break-all;
+  height: 80vh;
+  border-top: 1px solid #ddd;
+  word-break: break-all;
+  resize: none;
+}
+.resize{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow:0 0 1px 2px #ccc;
+  border-radius: 3px;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
 }
 .roleselect{
   line-height: 4vh;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
 }
 .roleselect.row{
   padding: 0;

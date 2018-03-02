@@ -50,29 +50,3 @@
 .noresize{
   resize: none;
 }
-.upload{
-  position: absolute;
-  top:-300px;
-  left:-300px;
-  width: 0;
-  height: 0;
-  cursor: pointer;
-}
-.lab_upload{
-  position: relative;
-  overflow: hidden;
-  width: 120px;
-  height: 120px;
-  text-align: center;
-  line-height: 120px;
-  background-color:#ddd; 
-  color: #777;
-  cursor: pointer;
-}
-.scriptimage{
-  position: absolute;
-  top:0;
-  left: 0;
-  width: 120px;
-  height: 120px;
-}
