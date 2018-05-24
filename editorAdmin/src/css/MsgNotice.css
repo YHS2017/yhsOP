@@ -1,0 +1,119 @@
+.msgnotice{
+  position: relative;
+  width: 100%;
+  top: 20px;
+  min-height: 650px;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  text-align: center;
+}
+.btn-green-m.newnotice{
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5px 0;
+}
+.totalnotice{
+  position: absolute;
+  height: 30px;
+  line-height: 30px;
+  top: 0;
+  left: 0;
+  margin: 10px 0;
+  font-size: 16px;
+}
+.noticelist{
+  width: 100%;
+  background-color: #fff;
+}
+.noticelist-title{
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-top: 20px;
+}
+.notice-row{
+  display: flex;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.notice-title{
+  text-align: left;
+  padding: 0 10px;
+}
+.notice-actionbtn{
+  display: inline-block;
+  line-height: 30px;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  font-size: 20px;
+  margin: 0 10px;
+  color: #6f6dd8;
+  background-color: #fff;
+}
+.notice-actionbtn:hover{
+  color: #5856b8;
+}
+.notice-actionbtn:active{
+  color: #6f6dd8;
+}
+.noticeeditor{
+  position: relative;
+  width: 100%;
+  height: 700px;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+.noticeedit{
+  position: absolute;
+  top: 80px;
+  left: 5px;
+  width: 34%;
+  height: calc(100% - 90px);
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  resize: none;
+  padding: 10px;
+  color: #888;
+  line-height: 18px;
+  outline: none;
+}
+.noticepreview{
+  position: absolute;
+  top: 80px;
+  right: 5px;
+  width: 64%;
+  height: calc(100% - 90px);
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 10px;
+  overflow: auto;
+}
+.code{
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #e5e5e5;
+  background-color: #fcfcfc;
+  line-height: 20px;
+  border-radius: 2px;
+}
+.noticepreview p{
+  margin: 10px 0;
+  line-height: 20px;
+}
+.noticepreview img{
+  max-width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}

@@ -1,0 +1,300 @@
+.preview{
+  position: absolute;
+  top: 0;
+  right: 102%;
+  width: calc((100vh - 60px) * 0.4653);
+  min-width: calc(768px * 0.4653);
+  height: 100%;
+  color: #333;
+  background-image: url('../images/preview_bg.png');
+  background-size: 100% 100%;
+}
+.preview-box{
+  position: relative;
+  width: 96%;
+  height: 94%;
+  margin-top: 6%;
+  margin-left: 2%;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  background-color: #f8f8f8;
+  overflow: hidden;
+}
+.preview-title{
+  width: 100%;
+  height: 30px;
+  border-radius: 25px 25px 0 0;
+  text-align: center;
+  line-height: 30px;
+  background: -webkit-linear-gradient(80deg, #b250ff, #e85fff);
+  background: -o-linear-gradient(80deg, #b250ff, #e85fff);
+  background: -moz-linear-gradient(80deg, #b250ff, #e85fff);
+  background: linear-gradient(80deg, #b250ff, #e85fff);
+  color: #fff;
+}
+.chat-box{
+  width: 100%;
+  height: calc(100% - 30px);
+  overflow: auto;
+}
+.aside{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px auto;
+}
+.aside .img{
+  display: block;
+  max-width:60%; 
+  border-radius: 5px;
+  box-shadow: 0 0 3px 3px rgba(0,0,0,0.05); 
+}
+.aside span{
+  display: block;
+  padding: 0 10px;
+  line-height: 24px;
+  text-align: left;
+  max-width: 60%;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background-color: rgba(0, 0, 0, 0.02);
+  font-size: 12px;
+  border-radius: 3px;
+  overflow: hidden;
+  word-break: break-all
+}
+.aside-box{
+  text-align: center;
+  width: 60%;
+  margin: 8px 20%;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+.aside-box .profile{
+  position: relative;
+  margin: 10px auto;
+}
+.meettype{
+  position: relative;
+  display: block;
+  line-height: 20px;
+  height: 20px;
+  width: 40px;
+  margin: 5px auto;
+  font-size: 12px;
+  color: #ccc;
+  background-color: #fff;
+}
+.meettype::before{
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 1px;
+  background-color: #ccc;
+  top: 9.5px;
+  left: -30px;
+}
+.meettype::after{
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 1px;
+  background-color: #ccc;
+  top: 9.5px;
+  right: -30px;
+}
+.meettitle{
+  margin: 10px 0;
+  font-size: 13px;
+}
+.meetbtn{
+  height: 30px;
+  line-height: 30px;
+  background-color: #b250ff;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+.msg-left,.msg-right{
+  position: relative;
+  overflow: hidden;
+  margin: 15px 0 5px 0;
+  padding-bottom: 5px;
+}
+.msg-pop,.img-pop,.video-pop,.audio-pop{
+  max-width: 220px;
+  min-width: 40px;
+  line-height: 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.05);
+}
+.img-pop,.video-pop{
+  overflow: hidden;
+}
+.msg-left .img-pop,.msg-left .video-pop{
+  margin: 20px 20px 0 45px; 
+  float: left;
+  background-color: #fff;
+}
+.msg-right .img-pop,.msg-right .video-pop{
+  margin: 20px 45px 0 20px; 
+  float: right;
+}
+.msg-left .msg-pop,.msg-left .audio-pop{
+  margin: 20px 20px 0 45px; 
+  float: left;
+  padding: 5px;
+  background-color: #fff;
+}
+.msg-right .msg-pop,.msg-right .audio-pop{
+  margin: 20px 45px 0 20px; 
+  float: right;
+  padding: 5px;
+  background: -webkit-linear-gradient(45deg, #b750ff, #d95bff);
+  background: -o-linear-gradient(45deg, #b750ff, #d95bff);
+  background: -moz-linear-gradient(45deg, #b750ff, #d95bff);
+  background: linear-gradient(45deg, #b750ff, #d95bff);
+  color: #fff;
+}
+.msg-left .img-pop,.msg-right .img-pop,.msg-left .video-pop,.msg-right .video-pop,.msg-left .audio-pop,.msg-right .audio-pop{
+  position: relative;
+  max-width: 40%;
+}
+.video-pop{
+  cursor: pointer;
+}
+.audio-pop{
+  min-width: 30px;
+  height: 30px;
+}
+.audio-icon,.audio-time{
+  position: absolute;
+  top: 0;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+}
+.msg-left .audio-icon{
+  left: 10px;
+  transform: rotate(90deg);
+  color: #ccc;
+}
+.msg-left .audio-time{
+  width: 60px;
+  text-align: left;
+  right: -70px;
+  color: #888;
+}
+.msg-right .audio-icon{
+  right: 10px;
+  transform: rotate(-90deg);
+}
+.msg-right .audio-time{
+  width: 60px;
+  text-align: right;
+  left: -70px;
+  color: #888;
+}
+.img{
+  float: left;
+  max-width: 100%;
+}
+.msg-pop span{
+  display: block;
+  white-space:pre-wrap;
+  word-wrap : break-word ;
+  overflow: hidden ;
+  word-break: break-all;
+  min-width: 20px;
+  min-height: 20px;
+  line-height: 20px;
+  font-size: 13px;
+}
+.profile{
+  position: absolute;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 30px;
+}
+.msg-left .profile{
+  left: 10px;
+}
+.msg-right .profile{
+  right: 10px;
+}
+.rolename{
+  position: absolute;
+  top: 0;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #999;
+}
+.msg-left .rolename{
+  left: 45px;
+}
+.msg-right .rolename{
+  right: 45px;
+}
+.play-btn{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  margin: -20px 0 0 -20px;
+  z-index: 5;
+}
+.videoplayer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 100;
+}
+.endbg{
+  width: 100%;
+  height: 100%;
+}
+.endbox{
+  position: absolute;
+  width: 80%;
+  height: 70%;
+  top: 10%;
+  left: 10%;
+  line-height: 24px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 20px;
+}
+.endtitle{
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #b250ff;
+}
+.endtext{
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.endbackbtn{
+  position: absolute;
+  width: 80%;
+  height: 46px;
+  line-height: 46px;
+  bottom: 5%;
+  left: 10%;
+  background-color: #b250ff;
+  border-radius: 40px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}

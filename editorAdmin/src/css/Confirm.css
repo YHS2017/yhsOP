@@ -1,0 +1,109 @@
+@keyframes fadein
+{
+  0%   {opacity: 0;}
+  100% {opacity: 1;}
+}
+ 
+@-webkit-keyframes fadein
+{
+  0%   {opacity: 0;}
+  100% {opacity: 1;}
+}
+@-moz-keyframes fadein
+{
+  0%   {opacity: 0;}
+  100% {opacity: 1;}
+}
+@-o-keyframes fadein
+{
+  0%   {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.appconfirm{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  user-select: none;
+  animation: fadein 0.5s ease-in;
+  -webkit-animation: fadein 0.3s ease-in;
+  -moz-animation: fadein 0.3s ease-in;
+  -o-animation: fadein 0.3s ease-in;
+}
+.confirm-box{
+  position: relative;
+  border-radius: 0 0 4px 4px;
+  width: 350px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 1px rgba(100, 100, 100, 0.5);
+}
+.confirm-box p{
+  padding: 20px;
+  width: 100%;
+  min-height: 150px;
+}
+.confirm-box h3{
+  position: absolute;
+  padding: 0 20px;
+  border-radius: 4px 4px 0 0;
+  top: -40px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  font-weight: normal;
+  background-color: #6f6dd8;
+  color: #fff;
+}
+.confirm-footer{
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  left: 0;
+  bottom: -40px;
+  padding: 10px 20px;
+  background-color: #fefdfc;
+  border-radius: 0 0 4px 4px;
+  border-top:1px solid #e5e5e5;
+}
+.confirm-yes,.confirm-no{
+  display: inline-block;
+  width: 70px;
+  height: 30px;
+  margin-right: 5px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.confirm-yes{
+  color: #fff;
+  background-color: #6f6dd8;
+}
+.confirm-no{
+  border: 1px solid #e5e5e5; 
+  background-color: #fff;
+}
+.confirm-yes:hover{
+  color: #fff;
+  background-color: #7978c4;
+}
+.confirm-no:hover{
+  background-color: #e5e5e5;
+}
+.confirm-yes:active{
+  background-color: #6f6dd8;
+}
+.confirm-no:active{
+  border: 1px solid #e5e5e5; 
+  background-color: #fff;
+}

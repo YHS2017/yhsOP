@@ -1,0 +1,10 @@
+.acccount{
+    width: 100%;
+    min-height: 650px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.account .btn-green-m{
+    margin: 20px 0;
+}

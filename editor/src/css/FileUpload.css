@@ -1,0 +1,50 @@
+#uploadbox{
+  position: relative;
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 5px 0;
+  overflow: hidden;
+}
+#uploadbox img{
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 3;
+}
+.upload{
+  position: absolute;
+  top:-100px;
+  left: -100px;
+  width: 0px;
+  height: 0px;
+  outline: none;
+}
+.uploadinfo{
+  width: 120px;
+  height: 120px;
+  background-image: url('../images/upload_default.png');
+  background-size: 100% 100%;
+  text-align: center;
+  border-radius: 4px;
+}
+.icon-ok{
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 60px;
+  text-align: center;
+  color: #84d476;
+}
+.uploadinfo p{
+  width: 100%;
+  padding: 10px;
+  line-height: 20px;
+  color: #84d476;
+}

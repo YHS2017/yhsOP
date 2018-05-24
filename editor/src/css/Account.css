@@ -1,0 +1,30 @@
+.account{
+    width: 100%;
+    min-height: 650px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.getcode-btn{
+    display: inline-block;
+    height: 30px;
+    padding: 0 20px;
+    line-height: 30px;
+    border-radius: 15px;
+    background-color: #6f6dd8;
+    margin: 0 10px;
+    color: #fff;
+    cursor: pointer;
+}
+.getcode-btn:hover{
+    background-color: #5856b8;
+}
+.getcode-btn:active{
+    background-color: #6f6dd8;
+}
+.getcode-btn.disabled{
+    background-color: #ccc;
+}
+.btn-green-m.step-btn{
+    margin-top: 30px;
+}

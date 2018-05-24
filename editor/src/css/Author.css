@@ -1,0 +1,15 @@
+.author{
+    width: 100%;
+    min-height: 500px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.userprofile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+.author .btn-green-m{
+    margin: 20px 0;
+}

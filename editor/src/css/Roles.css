@@ -1,0 +1,113 @@
+.roles{
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: calc(100% - 70px);
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+.roles-none{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 40px);
+  align-items: center;
+  justify-content: center;
+}
+.btn-blue-s.newrole-none{
+  margin: 20px 0;
+}
+.rolelist{
+  position: relative;
+  box-sizing: border-box;
+  width: 240px;
+  min-height: 600px;
+  transition: left 0.5s ease-in-out;
+  padding-top: 50px;
+  background-color: #6f6dd8;
+}
+.rolelist h3{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-family: '微软雅黑';
+	font-size: 18px;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0px;
+  color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+}
+.addrole{
+  position: absolute;
+  width: 40px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  color: #fff;
+}
+.addrole:hover{
+  color: #84d476;
+}
+.role-items{
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 5px 0;
+}
+.role-item{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  line-height: 40px;
+  padding: 5px 5px 5px 60px;
+  cursor: pointer;
+  margin: 5px 0;
+  color: #fff;
+  text-align: left
+}
+.role-item b{
+  font-weight: normal;
+}
+.role-item:hover,.role-item.current-role{
+  background-color: #fff;
+  color: #6f6dd8;
+}
+.role-item:hover .role-delete,.role-item.current-role .role-delete{
+  display: block;
+}
+.role-photo{
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+.role-delete{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  top: 5px;
+  right: 5px;
+  text-align: center;
+  display: none;
+}
+.roleseditor{
+  padding: 10px 20px;
+  text-align: left;
+}

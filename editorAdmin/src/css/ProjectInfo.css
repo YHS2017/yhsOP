@@ -1,0 +1,91 @@
+.projectinfo{
+  position: relative;
+  width: 100%;
+  min-height: 650px;
+  padding: 20px 20px 60px 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.projectinfo table{
+  margin-left: 200px;
+}
+.savechange{
+  position: absolute;
+  width: 80px;
+  bottom: 20px;
+  left: calc(50% - 40px);
+}
+.project-preview{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+}
+.project-preview p{
+  padding-bottom: 20px;
+}
+.tag-items label{
+  display: inline-block;
+  width: 100px;
+  height: 36px;
+  line-height: 30px;
+  padding-right: 10px;
+  margin: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+.tag-items label i{
+  font-style: normal;
+}
+.tag-items label input:checked+i{
+  color: #6f6dd8;
+}
+.tag-items label input{
+  position: relative;
+  width: 0px;
+  height: 16px;
+  margin: 0 5px 0 16px;
+}
+.tag-items label input::after{
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: -16px;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border-radius: 2px;
+  border:1px solid #e5e5e5;
+  z-index: 5;
+}
+.tag-items label input:checked::after{
+  border:1px solid #6f6dd8;
+}
+.tag-items label input:checked::before{
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -14px;
+  width: 10px;
+  height: 10px;
+  background-color: #6f6dd8;
+  border-radius: 2px;
+  z-index: 10;
+}
+.add-tag-item,.delete-tag-item{
+  display: inline-block;
+  line-height: 30px;
+  color: #c7c7c7;
+  font-size: 24px;
+  cursor: pointer;
+}
+.add-tag-item:hover,.delete-tag-item:hover{
+  color: #6f6dd8;
+}
+.delete-tag-item{
+  margin-left: 10px;
+}
