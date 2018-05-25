@@ -57,7 +57,7 @@
   width: 100%;
   height: 50px;
   line-height: 50px;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
 }
 .detailtime{
@@ -73,4 +73,59 @@
   overflow: hidden ;
   word-break: break-all;
   line-height: 24px;
+}
+/* .detailtext pre{
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #e5e5e5;
+  background-color: #fcfcfc;
+  line-height: 20px;
+  border-radius: 4px;
+} */
+.detailtext hr{
+  width: 100%;
+  height: 2px;
+  margin: 20px 0;
+  background-color: #e5e5e5;
+  border: none;
+}
+.detailtext p{
+  text-indent: 2em;
+  margin: 10px 0;
+  line-height: 20px;
+}
+detailtext h1{
+  margin: 10px 0 20px 0;
+}
+.detailtext h2{
+  margin: 5px 0 10px 0;
+}
+.detailtext h3,.detailtext h4,.detailtext h5{
+  margin: 5px 0;
+}
+.detailtext ul,.detailtext ol{
+  padding: 10px 30px;
+}
+.detailtext li{
+  padding-bottom: 10px;
+}
+.detailtext table{
+  width: 90%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 20px 5%;
+}
+.detailtext th,.detailtext td{
+  border: 1px solid #e5e5e5;
+  padding: 5px 10px;
+}
+.detailtext .img{
+  width: 100%;
+  text-align: center;
+}
+.detailtext img{
+  max-width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
 }

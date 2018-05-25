@@ -230,7 +230,7 @@ class ProjectInfo extends Component {
     const outline = this.state.outline;
     const tags = this.state.inittags.map((tag, key) => {
       return (
-        <label key={key}><input type="checkbox" value={tag} checked={outline.tags.indexOf(tag) !== -1} onChange={this.tagschange} /><i>{tag}</i></label>
+        <label className="checkbox" key={key}><input type="checkbox" value={tag} checked={outline.tags.indexOf(tag) !== -1} onChange={this.tagschange} /><i>{tag}</i></label>
       );
     });
     return (

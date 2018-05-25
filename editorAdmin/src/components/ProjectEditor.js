@@ -77,11 +77,11 @@ class ProjectEditor extends Component {
     if (router.split('-')[2] === 'Review') {
       iconbtns.push(<div className="icon-btn" key="0" onClick={() => setRouter('ProjectEditor-Setings-Outline')}><span className="fa fa-sliders sting-icon"></span>作品设置</div>);
       iconbtns.push(<div className="icon-btn" key="1" onClick={signProject}><span className="fa fa-pencil"></span>签约</div>);
-      iconbtns.push(<div className="icon-btn" key="1" onClick={notpassProject}><span className="fa fa-times-circle-o"></span>不通过</div>);
-      iconbtns.push(<div className="icon-btn" key="2" onClick={passProject}><span className="fa fa-check-circle-o"></span>通过</div>);
-      iconbtns.push(<div className="icon-btn" key="3" onClick={outlineProject}><span className="fa fa-cloud-download"></span>下架</div>);
-      iconbtns.push(<div className="icon-btn" key="4" onClick={onlineProject}><span className="fa fa-cloud-upload"></span>上架</div>);
-      iconbtns.push(<div className="icon-btn" key="5" onClick={saveProject}><span className="fa fa-floppy-o"></span>保存</div>);
+      iconbtns.push(<div className="icon-btn" key="2" onClick={notpassProject}><span className="fa fa-times-circle-o"></span>不通过</div>);
+      iconbtns.push(<div className="icon-btn" key="3" onClick={passProject}><span className="fa fa-check-circle-o"></span>通过</div>);
+      iconbtns.push(<div className="icon-btn" key="4" onClick={outlineProject}><span className="fa fa-cloud-download"></span>下架</div>);
+      iconbtns.push(<div className="icon-btn" key="5" onClick={onlineProject}><span className="fa fa-cloud-upload"></span>上架</div>);
+      iconbtns.push(<div className="icon-btn" key="6" onClick={saveProject}><span className="fa fa-floppy-o"></span>保存</div>);
     }
     return iconbtns;
   }

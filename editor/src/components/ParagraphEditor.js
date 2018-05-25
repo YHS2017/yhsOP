@@ -728,7 +728,7 @@ class ParagraphEditor extends Component {
               numberbranchs.push(
                 <tr key={i}>
                   <td>{'数值条件' + (i + 1) + ':'}</td>
-                  <td>{currentparagraph.key + ' < '}<input className="form-control" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
+                  <td>{currentparagraph.key + ' < '}<input className="form-control number" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
                 </tr>
               )
             } else if (i === currentparagraph.ranges.length - 1) {
@@ -742,7 +742,7 @@ class ParagraphEditor extends Component {
               numberbranchs.push(
                 <tr key={i}>
                   <td>{'数值条件' + (i + 1) + ':'}</td>
-                  <td>{currentparagraph.ranges[i - 1].value + ' < ' + currentparagraph.key + ' < '}<input className="form-control" type="number" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
+                  <td>{currentparagraph.ranges[i - 1].value + ' < ' + currentparagraph.key + ' < '}<input className="form-control number" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
                 </tr>
               )
             }
@@ -784,7 +784,7 @@ class ParagraphEditor extends Component {
           )
         case 'End':
           const gallerylist = this.props.content.galleries.map((item) => {
-            return <option key={item.id} value={item.id}>{"收藏到" + item.title}</option>
+            return <option key={item.id} value={item.id}>{item.title}</option>
           });
           return (
             <div className="paragrapheditor-end">
@@ -865,7 +865,7 @@ class ParagraphEditor extends Component {
                     <td>
                       <input className="form-control " type="number" value={currentparagraph.coin} onChange={(e) => this.changecoin(e, currentparagraph)} />
                       <p className="table-alert">1扑通币对应等待时间10分钟</p>
-                      </td>
+                    </td>
                   </tr>
                   <tr>
                     <td>锁描述：</td>

@@ -137,7 +137,7 @@ class ProjectList extends Component {
           <div className='flex-1'>签约</div>
           <div className='flex-1'>上架</div>
           <div className='flex-1'>审核</div>
-          <div className='flex-1'>审核人</div>
+          <div className='flex-1'>责编</div>
           <div className='flex-2'>操作</div>
         </div>
         {this.renderList()}

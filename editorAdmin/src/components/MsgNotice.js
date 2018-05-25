@@ -152,10 +152,6 @@ class MsgNotice extends Component {
   render() {
     const { notices, totalnotices } = this.props;
     const { pageIndex, pageCapacity, screen } = this.state;
-    const code = <div className="code"></div>;
-    const table = <div className="table"></div>;
-    const img = <div className="img"></div>
-    console.log(screen);
     if (screen === 'list') {
       if (notices.length === 0) {
         return (
@@ -203,7 +199,7 @@ class MsgNotice extends Component {
             <div className="btn-green-m newnotice" onClick={this.savenotice}>保存公告</div>
           </div>
           <textarea className="noticeedit" value={this.state.notice.text} onChange={this.changetext}></textarea>
-          <ReactMarkdown className="noticepreview" source={this.state.notice.text} renderers={{ code, table, img }}></ReactMarkdown>
+          <ReactMarkdown className="noticepreview" source={this.state.notice.text}></ReactMarkdown>
         </div >
       )
     }

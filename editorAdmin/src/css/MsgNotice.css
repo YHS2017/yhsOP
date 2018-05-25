@@ -35,7 +35,6 @@
   height: 40px;
   line-height: 40px;
   text-align: center;
-  margin-top: 20px;
 }
 .notice-row{
   display: flex;
@@ -73,7 +72,8 @@
   padding: 20px;
   border: 1px solid #e5e5e5;
   border-radius: 4px;
-  margin-top: 20px;
+  top: 20px;
+  margin-bottom: 20px;
 }
 .noticeedit{
   position: absolute;
@@ -100,17 +100,55 @@
   padding: 10px;
   overflow: auto;
 }
-.code{
+/* .noticepreview pre{
+  width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #e5e5e5;
   background-color: #fcfcfc;
   line-height: 20px;
-  border-radius: 2px;
+  border-radius: 4px;
+} */
+.noticepreview hr{
+  width: 100%;
+  height: 2px;
+  margin: 20px 0;
+  background-color: #e5e5e5;
+  border: none;
 }
 .noticepreview p{
+  text-indent: 2em;
   margin: 10px 0;
   line-height: 20px;
+}
+.noticepreview h1{
+  margin: 10px 0 20px 0;
+}
+.noticepreview h2{
+  margin: 5px 0 10px 0;
+}
+.noticepreview h3,.noticepreview h4,.noticepreview h5{
+  margin: 5px 0;
+}
+.noticepreview ul,.noticepreview ol{
+  padding: 10px 30px;
+}
+.noticepreview li{
+  padding-bottom: 10px;
+}
+.noticepreview table{
+  width: 90%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 20px 5%;
+}
+.noticepreview th,.noticepreview td{
+  border: 1px solid #e5e5e5;
+  padding: 5px 10px;
+}
+.noticepreview .img{
+  width: 100%;
+  text-align: center;
 }
 .noticepreview img{
   max-width: 100%;

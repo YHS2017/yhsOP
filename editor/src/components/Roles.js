@@ -113,13 +113,13 @@ class ScriptEditor extends Component {
         <table>
           <tbody>
             <tr>
-              <td className="table-txt">角色头像</td>
+              <td className="table-txt">头像</td>
               <td className="table-content">
                 <FileUpload getuploadurl={this.getuploadurl.bind(this)} src={this.state.currentrole.profile} filetype="img"></FileUpload>
               </td>
             </tr>
             <tr>
-              <td className="table-txt">角色名称</td>
+              <td className="table-txt">角色名</td>
               <td className="table-content">
                 <input className="form-control" value={this.state.currentrole.name} type="text" maxLength="7" onChange={this.changerolename} />
                 <p className="table-alert">名字最多7个字</p>
@@ -127,16 +127,16 @@ class ScriptEditor extends Component {
             </tr>
             <tr>
               <td className="table-txt">回忆按钮</td>
-              <td className="table-content tag-items">
-                <label><input type="checkbox" checked={this.state.currentrole.has_memory} onChange={this.changehasmemory} />有</label>
-                <label><input type="checkbox" checked={!this.state.currentrole.has_memory} onChange={this.changehasmemory} />没有</label>
+              <td className="table-content">
+                <label className="radio"><input type="checkbox" checked={this.state.currentrole.has_memory} onChange={this.changehasmemory} />有</label>
+                <label className="radio"><input type="checkbox" checked={!this.state.currentrole.has_memory} onChange={this.changehasmemory} />没有</label>
                 <p className="table-alert">选择是否在该角色的聊天界面右上角出现回忆按钮</p>
               </td>
             </tr>
             <tr>
               <td className="table-txt">人设备注</td>
               <td className="table-content">
-                <textarea className="form-control noresize" rows="6" cols="40" value={this.state.currentrole.remark} onChange={this.changeroleremark}></textarea>
+                <textarea className="form-control noresize" maxLength="200" rows="6" cols="40" value={this.state.currentrole.remark} onChange={this.changeroleremark}></textarea>
                 <p className="table-alert">选填，供作者写作参考，长度不得超过200</p>
               </td>
             </tr>

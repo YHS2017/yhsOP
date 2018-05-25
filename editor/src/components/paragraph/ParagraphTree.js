@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import '../../css/Paragraph.css';
 import {
     drawNode,
@@ -16,7 +16,7 @@ import {
 } from './styles';
 import PopupMenu from './PopupMenu';
 import ToolsMenu from './ToolsMenu';
-import {put, take} from "redux-saga/effects";
+import { put, take } from "redux-saga/effects";
 
 // import data from './data';
 
@@ -87,7 +87,7 @@ class ParagraphTree extends Component {
         window.onresize = null;
 
         Object.values(this._imagePatterns).forEach(i => {
-            const {loader} = i;
+            const { loader } = i;
             if (loader) {
                 loader.onload = null;
             }
@@ -95,7 +95,7 @@ class ParagraphTree extends Component {
     }
 
     updateCanvasSize = () => {
-        const {innerWidth: width, innerHeight: height} = window;
+        const { innerWidth: width, innerHeight: height } = window;
 
         this.setState(prev => ({
             ...prev,
@@ -201,7 +201,7 @@ class ParagraphTree extends Component {
             visited[paragraph.id] = true;
             if (isVisited) {
                 // 该节点已经被遍历过
-                return [{left: x, right: x}];
+                return [{ left: x, right: x }];
             }
 
             switch (paragraph.type) {
@@ -209,27 +209,27 @@ class ParagraphTree extends Component {
                 case 'Lock': {
                     const next_paragraph = getParagraph(paragraphs, paragraph.next_id);
                     if (next_paragraph) {
-                        return [{left: x, right: x}, ..._measure(next_paragraph, x)];
+                        return [{ left: x, right: x }, ..._measure(next_paragraph, x)];
                     }
                     else {
-                        return [{left: x, right: x}];
+                        return [{ left: x, right: x }];
                     }
                 }
 
                 case 'Branch': {
                     if (paragraph.expanded) {
-                        const {selections} = paragraph;
+                        const { selections } = paragraph;
                         const children = [];
                         const length = selections.length;
                         for (let i = 0; i < length; i++) {
                             const selection = selections[i];
                             const next_paragraph = getParagraph(paragraphs, selection.next_id);
                             if (next_paragraph) {
-                                children[i] = [{left: x, right: x}, ..._measure(next_paragraph, x)];
+                                children[i] = [{ left: x, right: x }, ..._measure(next_paragraph, x)];
                             }
                             else {
                                 // console.log('child', {left: center, right: center});
-                                children[i] = [{left: x, right: x}];
+                                children[i] = [{ left: x, right: x }];
                             }
                         }
 
@@ -242,18 +242,18 @@ class ParagraphTree extends Component {
 
                 case 'NumberBranch': {
                     if (paragraph.expanded) {
-                        const {ranges} = paragraph;
+                        const { ranges } = paragraph;
                         const children = [];
                         const length = ranges.length;
                         for (let i = 0; i < length; i++) {
                             const range = ranges[i];
                             const next_paragraph = getParagraph(paragraphs, range.next_id);
                             if (next_paragraph) {
-                                children[i] = [{left: x, right: x}, ..._measure(next_paragraph, x)];
+                                children[i] = [{ left: x, right: x }, ..._measure(next_paragraph, x)];
                             }
                             else {
                                 // console.log('child', {left: center, right: center});
-                                children[i] = [{left: x, right: x}];
+                                children[i] = [{ left: x, right: x }];
                             }
                         }
 
@@ -265,7 +265,7 @@ class ParagraphTree extends Component {
                 }
 
                 case 'End': {
-                    return [{left: x, right: x}];
+                    return [{ left: x, right: x }];
                 }
 
                 default:
@@ -280,17 +280,17 @@ class ParagraphTree extends Component {
     }
 
     getBranchTitle(branch) {
-        const {selections} = branch;
+        const { selections } = branch;
         return `①${selections[0].title}\n②${selections[1].title}${selections.length > 2 ? '\n' : ''}`
     }
 
     getNumberBranchTitle(branch) {
-        const {key, ranges} = branch;
-        return `${key}\n[${ranges.slice(0, -1).map(r => typeof(r.value) === 'number' ? r.value.toString() : '').join()}]`;
+        const { key, ranges } = branch;
+        return `${key}\n[${ranges.slice(0, -1).map(r => typeof (r.value) === 'number' ? r.value.toString() : '').join()}]`;
     }
 
     visit(paragraphs) {
-        const {roles} = this.props.content;
+        const { roles } = this.props.content;
         const branchPositions = this.measure(paragraphs);
         const images = {};  // 通过paragraph.chat_id获取角色头像
         roles.forEach(r => images[r.chat_id] = r.profile);
@@ -309,7 +309,7 @@ class ParagraphTree extends Component {
                     case 'Branch':
                         title = this.getBranchTitle(paragraph);
                         break;
-                        
+
                     case 'NumberBranch':
                         title = this.getNumberBranchTitle(paragraph);
                         break;
@@ -318,10 +318,10 @@ class ParagraphTree extends Component {
                         title = paragraph.title || '';
                         break;
                 }
-                const link = {id: paragraph.id, type: 'Link', title: title, x: x, y: y, parent: parent};
+                const link = { id: paragraph.id, type: 'Link', title: title, x: x, y: y, parent: parent };
 
                 if (parent) {
-                    const wire = {type: 'Wire', a: parent, b: link};
+                    const wire = { type: 'Wire', a: parent, b: link };
                     this.drawElement(wire);
                     parent.child = link;
                 }
@@ -341,7 +341,7 @@ class ParagraphTree extends Component {
                             parent: parent,
                         };
                         if (parent) {
-                            const wire = {type: 'Wire', a: parent, b: node};
+                            const wire = { type: 'Wire', a: parent, b: node };
                             this.drawElement(wire);
                             parent.child = node;
                         }
@@ -368,7 +368,7 @@ class ParagraphTree extends Component {
                             parent: parent,
                         };
                         if (parent) {
-                            const wire = {type: 'Wire', a: parent, b: lock};
+                            const wire = { type: 'Wire', a: parent, b: lock };
                             this.drawElement(wire);
                             parent.child = lock;
                         }
@@ -387,7 +387,7 @@ class ParagraphTree extends Component {
 
                     case 'Branch': {
                         if (paragraph.expanded) {
-                            const {id, selections} = paragraph;
+                            const { id, selections } = paragraph;
                             const positions = branchPositions[id];
                             const first = positions[0];
                             const last = positions[positions.length - 1];
@@ -409,7 +409,7 @@ class ParagraphTree extends Component {
                                 };
 
                                 if (parent) {
-                                    const wire = {type: 'Wire', a: parent, b: branch};
+                                    const wire = { type: 'Wire', a: parent, b: branch };
                                     this.drawElement(wire);
                                     parent.child = branch;
                                 }
@@ -437,7 +437,7 @@ class ParagraphTree extends Component {
 
                     case 'NumberBranch': {
                         if (paragraph.expanded) {
-                            const {id, key, ranges} = paragraph;
+                            const { id, key, ranges } = paragraph;
                             const positions = branchPositions[id];
                             const first = positions[0];
                             const last = positions[positions.length - 1];
@@ -470,7 +470,7 @@ class ParagraphTree extends Component {
                                 };
 
                                 if (parent) {
-                                    const wire = {type: 'Wire', a: parent, b: branch};
+                                    const wire = { type: 'Wire', a: parent, b: branch };
                                     this.drawElement(wire);
                                     parent.child = branch;
                                 }
@@ -508,7 +508,7 @@ class ParagraphTree extends Component {
                         this.drawElement(end);
 
                         if (parent) {
-                            const wire = {type: 'Wire', a: parent, b: end};
+                            const wire = { type: 'Wire', a: parent, b: end };
                             this.drawElement(wire);
                             parent.child = end;
                         }
@@ -527,51 +527,53 @@ class ParagraphTree extends Component {
     }
 
     updateReachableParagraphs() {
-        const {selectedElement} = this.state;
-        const {paragraphs} = this.props.content;
+        const { selectedElement } = this.state;
+        const { paragraphs } = this.props.content;
         const reachable = {};
         if (selectedElement) {
             const paragraph = paragraphs.find(p => p.id === selectedElement.id);
-            const searched = {};
-            const searching = [paragraph];
-            while (searching.length > 0) {
-                const current = searching.shift();
-                if (!searched[current.id]) {
-                    searched[current.id] = true;
-                    reachable[current.id] = true;
-                    switch (current.type) {
-                        case 'Node': {
-                            if (current.next_id !== -1) {
-                                const next = paragraphs.find(p => p.id === current.next_id);
-                                next && searching.push(next);
+            if (paragraph) {
+                const searched = {};
+                const searching = [paragraph];
+                while (searching.length > 0) {
+                    const current = searching.shift();
+                    if (!searched[current.id]) {
+                        searched[current.id] = true;
+                        reachable[current.id] = true;
+                        switch (current.type) {
+                            case 'Node': {
+                                if (current.next_id !== -1) {
+                                    const next = paragraphs.find(p => p.id === current.next_id);
+                                    next && searching.push(next);
+                                }
+                                break;
                             }
-                            break;
-                        }
 
-                        case 'Branch': {
-                            const {selections} = current;
-                            selections.forEach(s => {
-                                if (s.next_id !== -1) {
-                                    const next = paragraphs.find(p => p.id === s.next_id);
-                                    next && searching.push(next);
-                                }
-                            });
-                            break;
-                        }
+                            case 'Branch': {
+                                const { selections } = current;
+                                selections.forEach(s => {
+                                    if (s.next_id !== -1) {
+                                        const next = paragraphs.find(p => p.id === s.next_id);
+                                        next && searching.push(next);
+                                    }
+                                });
+                                break;
+                            }
 
-                        case 'NumberBranch': {
-                            const {ranges} = current;
-                            ranges.forEach(r => {
-                                if (r.next_id !== -1) {
-                                    const next = paragraphs.find(p => p.id === r.next_id);
-                                    next && searching.push(next);
-                                }
-                            });
-                            break;
-                        }
+                            case 'NumberBranch': {
+                                const { ranges } = current;
+                                ranges.forEach(r => {
+                                    if (r.next_id !== -1) {
+                                        const next = paragraphs.find(p => p.id === r.next_id);
+                                        next && searching.push(next);
+                                    }
+                                });
+                                break;
+                            }
 
-                        default:
-                            break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
@@ -580,9 +582,9 @@ class ParagraphTree extends Component {
     }
 
     loadImagePatterns() {
-        const {roles} = this.props.content;
+        const { roles } = this.props.content;
         roles.forEach(r => {
-            const {profile} = r;
+            const { profile } = r;
             if (!this._imagePatterns[profile]) {
                 const loader = new Image();
                 loader.src = profile + '/crop64';  // 使用/crop64让云服务器进行裁剪
@@ -604,11 +606,11 @@ class ParagraphTree extends Component {
     }
 
     draw() {
-        const {content} = this.props;
+        const { content } = this.props;
         this.updateReachableParagraphs();
         this.loadImagePatterns();
         if (content) {
-            const {canvas} = this.refs;
+            const { canvas } = this.refs;
             const context = canvas.getContext('2d');
 
             initialize(context, this.state.settings, this._imagePatterns);
@@ -621,7 +623,7 @@ class ParagraphTree extends Component {
     }
 
     transformToCanvas(x, y) {
-        const {scale, offsetX, offsetY} = this.state.settings;
+        const { scale, offsetX, offsetY } = this.state.settings;
         return {
             x: (x - offsetX) / scale,
             y: (y - offsetY) / scale,
@@ -629,7 +631,7 @@ class ParagraphTree extends Component {
     }
 
     transformToComponent(x, y) {
-        const {scale, offsetX, offsetY} = this.state.settings;
+        const { scale, offsetX, offsetY } = this.state.settings;
         return {
             x: x * scale + offsetX,
             y: y * scale + offsetY
@@ -711,7 +713,7 @@ class ParagraphTree extends Component {
     }
 
     isSelected(element) {
-        const {selectedElement} = this.state;
+        const { selectedElement } = this.state;
         if (selectedElement) {
             switch (element.type) {
                 case 'Node':
@@ -731,8 +733,8 @@ class ParagraphTree extends Component {
     }
 
     isDisabled(element) {
-        const {selectedElement, operation} = this.state;
-        const {content} = this.props;
+        const { selectedElement, operation } = this.state;
+        const { content } = this.props;
         switch (operation) {
             case 'Linking':
                 switch (element.type) {
@@ -796,7 +798,7 @@ class ParagraphTree extends Component {
     }
 
     isHighlighted(element) {
-        const {highlightedElement} = this.state;
+        const { highlightedElement } = this.state;
         if (highlightedElement && highlightedElement.type === element.type) {
             switch (element.type) {
                 case 'Node':
@@ -816,7 +818,7 @@ class ParagraphTree extends Component {
     }
 
     hasError(element) {
-        const {errors} = this.props;
+        const { errors } = this.props;
         switch (element.type) {
             case 'Node':
             case 'End':
@@ -833,7 +835,7 @@ class ParagraphTree extends Component {
 
     onClickNode = (element) => {
         console.log('Node is clicked', element.id);
-        const {selectedElement, operation} = this.state;
+        const { selectedElement, operation } = this.state;
         switch (operation) {
             case 'Linking':
                 this.props.linkParagraphs(
@@ -871,7 +873,7 @@ class ParagraphTree extends Component {
 
     onClickBranch = (element) => {
         console.log('Branch is clicked', element.id);
-        const {selectedElement, operation} = this.state;
+        const { selectedElement, operation } = this.state;
         switch (operation) {
             case 'Linking':
                 this.props.linkParagraphs(
@@ -909,7 +911,7 @@ class ParagraphTree extends Component {
 
     onClickEnd = (element) => {
         console.log('End is clicked', element.id);
-        const {selectedElement, operation} = this.state;
+        const { selectedElement, operation } = this.state;
         switch (operation) {
             case 'Linking':
                 this.props.linkParagraphs(
@@ -947,7 +949,7 @@ class ParagraphTree extends Component {
 
     onClickLock = (element) => {
         console.log('Lock is clicked', element.id);
-        const {selectedElement, operation} = this.state;
+        const { selectedElement, operation } = this.state;
         switch (operation) {
             case 'Linking':
                 this.props.linkParagraphs(
@@ -985,7 +987,7 @@ class ParagraphTree extends Component {
 
     onClickLink = (element) => {
         console.log('Link is clicked', element.id);
-        const {selectedElement, operation} = this.state;
+        const { selectedElement, operation } = this.state;
         switch (operation) {
             case 'Linking':
                 this.props.linkParagraphs(
@@ -1053,7 +1055,7 @@ class ParagraphTree extends Component {
     }
 
     onClickShape(shape) {
-        const {element} = shape;
+        const { element } = shape;
         switch (element.type) {
             case 'Node':
                 this.onClickNode(element);
@@ -1089,7 +1091,7 @@ class ParagraphTree extends Component {
     }
 
     getMousePositionInCanvas(event) {
-        const {canvas} = this.refs;
+        const { canvas } = this.refs;
         const rect = canvas.getBoundingClientRect();
         return {
             mouseX: event.clientX - rect.left,
@@ -1103,14 +1105,14 @@ class ParagraphTree extends Component {
 
             event.stopPropagation();
             if (!this._clickDisabled) {
-                const {mouseX, mouseY} = this.getMousePositionInCanvas(event);
-                const {x, y} = this.transformToCanvas(mouseX, mouseY);
+                const { mouseX, mouseY } = this.getMousePositionInCanvas(event);
+                const { x, y } = this.transformToCanvas(mouseX, mouseY);
                 const shape = this.getShape(x, y);
                 if (shape) {
                     this.onClickShape(shape);
                 }
                 else {
-                    const {operation} = this.state;
+                    const { operation } = this.state;
                     switch (operation) {
                         case 'Linking':
                         case 'Moving':
@@ -1160,7 +1162,7 @@ class ParagraphTree extends Component {
         if (this.isEventFromCanvas(event)) {
             if (event.button === 0) {   // 鼠标左键
                 event.stopPropagation();
-                const {mouseX, mouseY} = this.getMousePositionInCanvas(event);
+                const { mouseX, mouseY } = this.getMousePositionInCanvas(event);
                 // const {x, y} = this.transformToCanvas(mouseX, mouseY);
 
                 this._isMouseDown = true;
@@ -1174,8 +1176,8 @@ class ParagraphTree extends Component {
     onMouseMove = (event) => {
         if (this.isEventFromCanvas(event)) {
             event.stopPropagation();
-            const {mouseX, mouseY} = this.getMousePositionInCanvas(event);
-            const {x, y} = this.transformToCanvas(mouseX, mouseY);
+            const { mouseX, mouseY } = this.getMousePositionInCanvas(event);
+            const { x, y } = this.transformToCanvas(mouseX, mouseY);
             const distanceSqrt = Math.pow(mouseX - this._mouseStartX, 2) + Math.pow(mouseY - this._mouseStartY, 2);
 
             if (this.state.drag) {
@@ -1210,7 +1212,7 @@ class ParagraphTree extends Component {
         if (this.isEventFromCanvas(event)) {
             if (event.button === 0) {   // 鼠标左键
                 event.stopPropagation();
-                const {mouseX, mouseY} = this.getMousePositionInCanvas(event);
+                const { mouseX, mouseY } = this.getMousePositionInCanvas(event);
                 if (this.state.drag) {
                     this.onDragEnd(this.state.drag, mouseX, mouseY);
                 }
@@ -1250,7 +1252,7 @@ class ParagraphTree extends Component {
     onDrag(drag, mouseX, mouseY) {
         // console.log('Drag', this.state.drag.startMouseX, this.state.drag.startMouseY, mouseX, mouseY);
 
-        const {startOffsetX, startOffsetY, startMouseX, startMouseY} = this.state.drag;
+        const { startOffsetX, startOffsetY, startMouseX, startMouseY } = this.state.drag;
         switch (drag.type) {
             case 'canvas':
                 this.setState(prev => ({
@@ -1324,16 +1326,16 @@ class ParagraphTree extends Component {
     }
 
     renderPopupMenu() {
-        const {highlightedElement, drag} = this.state;
+        const { highlightedElement, drag } = this.state;
         if ((highlightedElement && highlightedElement.type !== 'Joint') && (!drag || !this._clickDisabled)) {
-            const {x, y} = this.transformToComponent(highlightedElement.x, highlightedElement.y + 20);
+            const { x, y } = this.transformToComponent(highlightedElement.x, highlightedElement.y + 20);
             return (
                 <PopupMenu element={highlightedElement} ref={'menu'} x={x} y={y}
-                           setLinkingElement={element => this.setLinkingElement(element)}
-                           setMovingElement={element => this.setMovingElement(element)}
-                           setSelectedElement={element => this.setSelectedElement(element)}
-                           setHighlightedElement={element => this.setHighlightedElement(element)}
-                           resetOperation={element => this.resetOperation(element)}
+                    setLinkingElement={element => this.setLinkingElement(element)}
+                    setMovingElement={element => this.setMovingElement(element)}
+                    setSelectedElement={element => this.setSelectedElement(element)}
+                    setHighlightedElement={element => this.setHighlightedElement(element)}
+                    resetOperation={element => this.resetOperation(element)}
                 />);
         }
         else {
@@ -1342,7 +1344,7 @@ class ParagraphTree extends Component {
     }
 
     renderOperationMenu() {
-        const {operation} = this.state;
+        const { operation } = this.state;
         switch (operation) {
             case 'Linking':
                 return (
@@ -1366,7 +1368,7 @@ class ParagraphTree extends Component {
     }
 
     scaleUp = () => {
-        const {offsetX, offsetY, scale, width, height} = this.state.settings;
+        const { offsetX, offsetY, scale, width, height } = this.state.settings;
         const max = 2;
         const step = 0.25;
         const s = Math.min(max, scale + step);
@@ -1387,7 +1389,7 @@ class ParagraphTree extends Component {
     };
 
     scaleDown = () => {
-        const {offsetX, offsetY, scale, width, height} = this.state.settings;
+        const { offsetX, offsetY, scale, width, height } = this.state.settings;
         const min = 0.5;
         const step = -0.25;
         const s = Math.max(min, scale + step);
@@ -1407,18 +1409,18 @@ class ParagraphTree extends Component {
     };
 
     aim = () => {
-        const {selectedElement} = this.state;
+        const { selectedElement } = this.state;
         if (selectedElement) {
             this.moveCanvasWithElementAsCenter(selectedElement);
         }
     };
 
     renderToolsMenu() {
-        return <ToolsMenu scaleUp={this.scaleUp} scaleDown={this.scaleDown} aim={this.aim}/>;
+        return <ToolsMenu scaleUp={this.scaleUp} scaleDown={this.scaleDown} aim={this.aim} />;
     }
 
     moveCanvasWithElementAsCenter(element) {
-        const {width, height, scale} = this.state.settings;
+        const { width, height, scale } = this.state.settings;
         this.setState(prev => ({
             ...prev,
             settings: {
@@ -1434,18 +1436,18 @@ class ParagraphTree extends Component {
 
         return (
             <div className="paragraphs" onClick={this.onClick}
-                 onMouseEnter={this.onMouseEnter}
-                 onMouseMove={this.onMouseMove}
-                 onMouseDown={this.onMouseDown}
-                 onMouseUp={this.onMouseUp}
-                 onMouseLeave={this.onMouseLeave}
-                 onWheel={this.onMouseWheel}>
+                onMouseEnter={this.onMouseEnter}
+                onMouseMove={this.onMouseMove}
+                onMouseDown={this.onMouseDown}
+                onMouseUp={this.onMouseUp}
+                onMouseLeave={this.onMouseLeave}
+                onWheel={this.onMouseWheel}>
                 <canvas tag={'canvas'}
-                        ref={'canvas'}
-                        className={'canvas'}
-                        style={{cursor: this.state.cursor}}
-                        width={this.state.settings.width}
-                        height={this.state.settings.height}
+                    ref={'canvas'}
+                    className={'canvas'}
+                    style={{ cursor: this.state.cursor }}
+                    width={this.state.settings.width}
+                    height={this.state.settings.height}
                 />
                 {this.renderPopupMenu()}
                 {this.renderToolsMenu()}

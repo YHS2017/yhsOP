@@ -69,7 +69,7 @@ class Numbers extends Component {
       const numberlist = this.state.numbers.map((item) => {
         return (
           <tr key={item.id}>
-            <td>{"数值属性" + item.id}</td>
+            <td>{"数值" + item.id}</td>
             <td><input className="form-control" type="text" value={item.title} onChange={(e) => this.changetitle(e, item.id)} /></td>
             <td>{"初始值"}</td>
             <td><input className="form-control" type="text" value={item.number} onChange={(e) => this.changenumber(e, item.id)} /></td>

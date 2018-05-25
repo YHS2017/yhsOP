@@ -100,7 +100,7 @@ class Project extends Component {
         <div className="flex-1">{outline.sign_status === 0 ? '未签约' : '已签约'}</div>
         <div className="flex-1">{outline.online_status === 0 ? '未上架' : '已上架'}</div>
         <div className="flex-1">{this.getstatus(outline.status)}</div>
-        <div className="flex-1">{outline.admin_name === '' ? '无' : outline.admin_name}</div>
+        <div className="flex-1">{outline.admin_name === '' ? '无责编' : outline.admin_name}</div>
         <div className="flex-2">
           {this.renderbtn(outline)}
         </div>

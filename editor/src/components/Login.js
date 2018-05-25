@@ -121,10 +121,16 @@ class Login extends Component {
   phonebind = () => {
     let phone = this.state.phone;
     let code = this.state.code;
-    if (phone === '' || code === '' || phone.match(/^[1][3,4,5,7,8][0-9]{9}$/) === null) {
-      return;
+    if (phone === '') {
+      this.setState({ ...this, phoneerror: '请输入手机号！' });
+    } else if (phone.match(/^[1][3,4,5,7,8][0-9]{9}$/) === null) {
+      this.setState({ ...this, phoneerror: '请输入有效的手机号！' });
     } else {
-      this.props.phoneBind(phone, code);
+      if (code === '') {
+        this.setState({ ...this, codeerror: '请输入验证码！' });
+      } else {
+        this.props.phoneBind(code);
+      }
     }
   }
 

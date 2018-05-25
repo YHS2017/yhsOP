@@ -190,7 +190,7 @@ class Home extends Component {
           <div className="user">
             <img className="user-photo" alt="头像" src={this.props.user.profile === '' ? this.state.defaultimg : this.props.user.profile} />
             <ul className="user-menu">
-              <li className="text-center" onClick={() => setRouter('Home-Author')}><span className="fa fa-user-circle"></span>作者资料</li>
+              <li className="text-center" onClick={() => setRouter('Home-Author-Show')}><span className="fa fa-user-circle"></span>作者资料</li>
               <li className="text-center" onClick={() => setRouter('Home-Account-OldPhone')}><span className="fa fa-cog"></span>账号管理</li>
               <li className="text-center" onClick={this.logout}><span className="fa fa-sign-out"></span>退出登录</li>
             </ul>

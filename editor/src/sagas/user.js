@@ -410,6 +410,7 @@ function* updateUser(action) {
       yield put({ type: 'UPDATE_USER_INFO', user: action.user });
       const userinfo = yield getUser();
       sessionStorage.setItem('user', JSON.stringify(userinfo));
+      yield put({ type: 'NAVIGATE_TO_ROUTER', router: 'Home-Author-Show' });
     } else if (result.error === 1225) {
       yield setAppMessage('资料修改失败，笔名只能30天修改一次！');
     } else if (result.error === 1226) {

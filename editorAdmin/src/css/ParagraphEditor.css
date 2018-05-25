@@ -95,6 +95,9 @@
 .roleselect.row{
   padding: 0 0 0 10px;
 }
+.form-control.number{
+  width: 80px;
+}
 .toolbox{
   position: fixed;
   top: 0;

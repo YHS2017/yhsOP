@@ -7,7 +7,6 @@ class Author extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: 'show',
       user: null,
     };
   }
@@ -19,7 +18,7 @@ class Author extends Component {
   }
 
   toedit = () => {
-    this.setState({ type: 'edit' });
+    this.props.setRouter('Home-Author-Edit');
   }
 
   changeqq = (e) => {
@@ -44,7 +43,7 @@ class Author extends Component {
   }
 
   render() {
-    if (this.state.type === 'show') {
+    if (this.props.router.split('-')[2] === 'Show') {
       return (
         <div className="author">
           <table>
@@ -77,7 +76,7 @@ class Author extends Component {
             <tbody>
               <tr>
                 <td className="table-txt" style={{ verticalAlign: 'middle' }}>头像:</td>
-                <td className="table-content"><FileUpload getuploadurl={this.getuploadurl.bind(this)} src={this.state.user.profile}></FileUpload></td>
+                <td className="table-content"><div className="userprofile"><FileUpload getuploadurl={this.getuploadurl.bind(this)} src={this.state.user.profile} filetype="img"></FileUpload></div></td>
               </tr>
               <tr>
                 <td className="table-txt">作者ID:</td>
@@ -94,6 +93,7 @@ class Author extends Component {
                 <td className="table-txt">QQ:</td>
                 <td className="table-content">
                   <input className="form-control" type="text" value={this.state.user.qq ? this.state.user.qq : ''} onChange={this.changeqq} />
+                  {this.state.user.qq === '' ? <div className="table-alert">请填写常用的QQ号码，便于编辑快速联系到您</div> : ''}
                 </td>
               </tr>
             </tbody>
@@ -107,12 +107,13 @@ class Author extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user };
+  return { user: state.user, router: state.app.router };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateUserInfo: (user) => dispatch({ type: 'UPDATE_USER', user }),
+    setRouter: (router) => dispatch({ type: 'NAVIGATE_TO_ROUTER', router }),
   }
 }
 

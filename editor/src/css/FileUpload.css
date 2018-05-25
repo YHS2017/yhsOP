@@ -17,6 +17,9 @@
   cursor: pointer;
   z-index: 3;
 }
+.userprofile #uploadbox img{
+  border-radius: 60px;
+}
 .upload{
   position: absolute;
   top:-100px;

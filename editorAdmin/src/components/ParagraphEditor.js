@@ -728,7 +728,7 @@ class ParagraphEditor extends Component {
               numberbranchs.push(
                 <tr key={i}>
                   <td>{'数值条件' + (i + 1) + ':'}</td>
-                  <td>{currentparagraph.key + ' < '}<input className="form-control" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
+                  <td>{currentparagraph.key + ' < '}<input className="form-control number" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
                 </tr>
               )
             } else if (i === currentparagraph.ranges.length - 1) {
@@ -742,7 +742,7 @@ class ParagraphEditor extends Component {
               numberbranchs.push(
                 <tr key={i}>
                   <td>{'数值条件' + (i + 1) + ':'}</td>
-                  <td>{currentparagraph.ranges[i - 1].value + ' < ' + currentparagraph.key + ' < '}<input className="form-control" type="number" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
+                  <td>{currentparagraph.ranges[i - 1].value + ' < ' + currentparagraph.key + ' < '}<input className="form-control number" value={currentparagraph.ranges[i].value} onChange={(e) => this.rangevaluechange(e, currentparagraph, i)} /></td>
                 </tr>
               )
             }
@@ -784,7 +784,7 @@ class ParagraphEditor extends Component {
           )
         case 'End':
           const gallerylist = this.props.content.galleries.map((item) => {
-            return <option key={item.id} value={item.id}>{"收藏到" + item.title}</option>
+            return <option key={item.id} value={item.id}>{item.title}</option>
           });
           return (
             <div className="paragrapheditor-end">
@@ -818,7 +818,7 @@ class ParagraphEditor extends Component {
                     <td>结局描述：</td>
                     <td>
                       <textarea className="form-control" cols="40" rows="10" value={currentparagraph.text} onChange={(e) => this.changetext(e, currentparagraph)}></textarea>
-                      <p>不超过150字</p>
+                      <p>结局描述最多200字</p>
                     </td>
                   </tr>
                   <tr>
