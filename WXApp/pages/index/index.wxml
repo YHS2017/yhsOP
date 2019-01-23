@@ -1,20 +1,25 @@
 <!--index.wxml-->
 <view class="container">
-  <scroll-view scroll-x="">
-    <swiper class="branchs" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="#fff">
-      <block wx:for="{{imgUrls}}">
+  <scroll-view class="scrolllist" scroll-y="true" bindscrolltolower="getMore">
+    <swiper class="branchs" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"  indicator-active-color="#fff">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" />
+          <image src="{{item}}" class="slide-image" mode="widthFix"/>
         </swiper-item>
       </block>
     </swiper>
-    <view class="list" wx:for="{{list}}">
-      <view class="list-item">
-        <image url="{{item.image}}"></image>
-        <text class="title">{{item.title}}</text>
-        <text class="">{{item.price}}</text>
+    <view class="list">
+      <view class="list-item" wx:for="{{list}}" wx:key="{{index}}">
+        <image class="goods-img" src="{{item.goods_img}}" mode="widthFix"/>
+        <text class="goods-name">{{item.goods_name}}</text>
+        <view class="goods-price">
+          <text class="price">￥{{item.goods_price}}/{{item.goods_unit}}</text>
+          <text class="vip-price">￥{{item.goods_vip_price}}/{{item.goods_unit}}(VIP)</text>
+        </view>
       </view>
     </view>
+    <view class="list-footer">
+      <text>加载更多...</text>
+    </view>
   </scroll-view>
-  
 </view>
