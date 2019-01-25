@@ -1,24 +1,34 @@
 <template>
   <el-container id="app">
-    <el-header id="header" height="80px"></el-header>
+    <el-header
+      id="header"
+      height="80px"
+    ></el-header>
     <el-container id="body">
-      <el-aside id="menu" width="200px">
-        <el-menu id="menu-ul" default-active="1">
-          <el-submenu index="1-1">
+      <el-aside
+        id="menu"
+        width="200px"
+      >
+        <el-menu
+          id="menu-ul"
+          default-active="/home/1"
+          router="true"
+        >
+          <el-submenu index="/home">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>导航一</span>
+              <span>Home</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-              <el-menu-item index="1-3">选项3</el-menu-item>
-              <el-menu-item index="1-4">选项1</el-menu-item>
+              <el-menu-item index="/home/1">选项1</el-menu-item>
+              <el-menu-item index="/home/2">选项2</el-menu-item>
+              <el-menu-item index="/home/3">选项3</el-menu-item>
+              <el-menu-item index="/home/4">选项4</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="2">
+          <el-menu-item index="/about">
             <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
+            <span slot="title">About</span>
           </el-menu-item>
           <el-menu-item index="3">
             <i class="el-icon-document"></i>
@@ -31,11 +41,7 @@
         </el-menu>
       </el-aside>
       <el-main id="main">
-        <div id="nav">
-          <router-link to="/">Home</router-link>|
-          <router-link to="/about">About</router-link>
-        </div>
-        <router-view/>
+        <router-view />
       </el-main>
     </el-container>
   </el-container>
@@ -43,9 +49,7 @@
 
 <script>
 export default {
-  methods: {
-    
-  }
+  methods: {}
 };
 </script>
 
@@ -86,7 +90,7 @@ body {
   border-right: 1px solid #eee;
 }
 
-#menu-ul{
+#menu-ul {
   border: none;
 }
 
