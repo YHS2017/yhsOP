@@ -89,20 +89,22 @@ var Main = (function (_super) {
         var factor = 50;
         //创建world
         var world = new p2.World();
-        p2.vec2.set(world.gravity, 0, 0);
-        // world.sleepMode = p2.World.BODY_SLEEPING;
+        world.gravity = [0, 0];
+        // world.sleepMode = p2.World.NO_SLEEPING;
         //创建材质
         var BallMaterial = new p2.Material(1);
         var PlaneMaterial = new p2.Material(2);
         //初始化材质碰撞系数
-        var gameSteelContactMaterial = new p2.ContactMaterial(BallMaterial, PlaneMaterial, { restitution: 1 });
-        world.addContactMaterial(gameSteelContactMaterial);
+        var ballplanelContactMaterial = new p2.ContactMaterial(BallMaterial, PlaneMaterial, { friction: 0, restitution: 1 });
+        var ballsContactMaterial = new p2.ContactMaterial(BallMaterial, BallMaterial, { friction: 0, restitution: 1 });
+        world.addContactMaterial(ballplanelContactMaterial);
+        world.addContactMaterial(ballsContactMaterial);
         //创建墙壁
         var TopPlaneShape = new p2.Plane();
         TopPlaneShape.material = PlaneMaterial;
         var TopPlaneBody = new p2.Body({
             type: p2.Body.STATIC,
-            position: [this.stage.stageWidth, 0],
+            position: [egret.MainContext.instance.stage.stageWidth / factor, egret.MainContext.instance.stage.stageHeight / factor],
         });
         TopPlaneBody.angle = Math.PI;
         TopPlaneBody.displays = [];
@@ -117,26 +119,26 @@ var Main = (function (_super) {
         BottomPlaneBody.displays = [];
         BottomPlaneBody.addShape(BottomPlaneShape);
         world.addBody(BottomPlaneBody);
-        // let LeftPlaneShape: p2.Plane = new p2.Plane();
-        // LeftPlaneShape.material = PlaneMaterial;
-        // let LeftPlaneBody = new p2.Body({
-        //     type: p2.Body.STATIC,
-        //     position: [0, 0],
-        // });
-        // LeftPlaneBody.angle = Math.PI / 2;
-        // LeftPlaneBody.displays = [];
-        // LeftPlaneBody.addShape(LeftPlaneShape);
-        // world.addBody(LeftPlaneBody);
-        // let RigthPlaneShape: p2.Plane = new p2.Plane();
-        // RigthPlaneShape.material = PlaneMaterial;
-        // let RigthPlaneBody = new p2.Body({
-        //     type: p2.Body.STATIC,
-        //     position: [this.stage.stageWidth, -this.stage.stageHeight],
-        // });
-        // RigthPlaneBody.angle = -Math.PI / 2;
-        // RigthPlaneBody.displays = [];
-        // RigthPlaneBody.addShape(RigthPlaneShape);
-        // world.addBody(RigthPlaneBody);
+        var LeftPlaneShape = new p2.Plane();
+        LeftPlaneShape.material = PlaneMaterial;
+        var LeftPlaneBody = new p2.Body({
+            type: p2.Body.STATIC,
+            position: [0, egret.MainContext.instance.stage.stageHeight / factor],
+        });
+        LeftPlaneBody.angle = -Math.PI / 2;
+        LeftPlaneBody.displays = [];
+        LeftPlaneBody.addShape(LeftPlaneShape);
+        world.addBody(LeftPlaneBody);
+        var RigthPlaneShape = new p2.Plane();
+        RigthPlaneShape.material = PlaneMaterial;
+        var RigthPlaneBody = new p2.Body({
+            type: p2.Body.STATIC,
+            position: [egret.MainContext.instance.stage.stageWidth / factor, 0],
+        });
+        RigthPlaneBody.angle = Math.PI / 2;
+        RigthPlaneBody.displays = [];
+        RigthPlaneBody.addShape(RigthPlaneShape);
+        world.addBody(RigthPlaneBody);
         egret.Ticker.getInstance().register(function (dt) {
             if (dt < 10) {
                 return;
@@ -153,13 +155,6 @@ var Main = (function (_super) {
                 if (box) {
                     box.x = boxBody.position[0] * factor;
                     box.y = stageHeight - boxBody.position[1] * factor;
-                    box.rotation = 360 - (boxBody.angle + boxBody.shapes[0].angle) * 180 / Math.PI;
-                    if (boxBody.sleepState == p2.Body.SLEEPING) {
-                        box.alpha = 0.5;
-                    }
-                    else {
-                        box.alpha = 1;
-                    }
                 }
             }
         }, this);
@@ -172,9 +167,9 @@ var Main = (function (_super) {
             var display;
             //添加圆形刚体
             //var boxShape: p2.Shape = new p2.Circle(1);
-            var boxShape = new p2.Circle({ radius: 1 });
+            var boxShape = new p2.Circle({ radius: 0.5 });
             boxShape.material = BallMaterial;
-            var boxBody = new p2.Body({ mass: 1, position: [positionX, positionY], velocity: [0, -5] });
+            var boxBody = new p2.Body({ mass: 1, damping: 0, fixedRotation: true, position: [positionX, positionY], velocity: [-10, -10] });
             boxBody.addShape(boxShape);
             world.addBody(boxBody);
             if (self.isDebug) {

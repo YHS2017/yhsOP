@@ -88,23 +88,25 @@ class Main extends egret.DisplayObjectContainer {
 
         //创建world
         var world: p2.World = new p2.World();
-        p2.vec2.set(world.gravity, 0, 0);
-        // world.sleepMode = p2.World.BODY_SLEEPING;
+        world.gravity = [0, 0];
+        // world.sleepMode = p2.World.NO_SLEEPING;
 
         //创建材质
         var BallMaterial: p2.Material = new p2.Material(1);
         var PlaneMaterial: p2.Material = new p2.Material(2);
 
         //初始化材质碰撞系数
-        var gameSteelContactMaterial: p2.ContactMaterial = new p2.ContactMaterial(BallMaterial, PlaneMaterial, <p2.ContactMaterialOptions>{ restitution: 1 });
-        world.addContactMaterial(gameSteelContactMaterial);
+        var ballplanelContactMaterial: p2.ContactMaterial = new p2.ContactMaterial(BallMaterial, PlaneMaterial, <p2.ContactMaterialOptions>{ friction: 0, restitution: 1 });
+        var ballsContactMaterial: p2.ContactMaterial = new p2.ContactMaterial(BallMaterial, BallMaterial, <p2.ContactMaterialOptions>{ friction: 0, restitution: 1 });
+        world.addContactMaterial(ballplanelContactMaterial);
+        world.addContactMaterial(ballsContactMaterial);
 
         //创建墙壁
         let TopPlaneShape: p2.Plane = new p2.Plane();
         TopPlaneShape.material = PlaneMaterial;
         let TopPlaneBody = new p2.Body({
             type: p2.Body.STATIC,
-            position: [this.stage.stageWidth, 0],
+            position: [egret.MainContext.instance.stage.stageWidth / factor, egret.MainContext.instance.stage.stageHeight / factor],
         });
         TopPlaneBody.angle = Math.PI;
         TopPlaneBody.displays = [];
@@ -121,27 +123,27 @@ class Main extends egret.DisplayObjectContainer {
         BottomPlaneBody.addShape(BottomPlaneShape);
         world.addBody(BottomPlaneBody);
 
-        // let LeftPlaneShape: p2.Plane = new p2.Plane();
-        // LeftPlaneShape.material = PlaneMaterial;
-        // let LeftPlaneBody = new p2.Body({
-        //     type: p2.Body.STATIC,
-        //     position: [0, 0],
-        // });
-        // LeftPlaneBody.angle = Math.PI / 2;
-        // LeftPlaneBody.displays = [];
-        // LeftPlaneBody.addShape(LeftPlaneShape);
-        // world.addBody(LeftPlaneBody);
+        let LeftPlaneShape: p2.Plane = new p2.Plane();
+        LeftPlaneShape.material = PlaneMaterial;
+        let LeftPlaneBody = new p2.Body({
+            type: p2.Body.STATIC,
+            position: [0, egret.MainContext.instance.stage.stageHeight / factor],
+        });
+        LeftPlaneBody.angle = -Math.PI / 2;
+        LeftPlaneBody.displays = [];
+        LeftPlaneBody.addShape(LeftPlaneShape);
+        world.addBody(LeftPlaneBody);
 
-        // let RigthPlaneShape: p2.Plane = new p2.Plane();
-        // RigthPlaneShape.material = PlaneMaterial;
-        // let RigthPlaneBody = new p2.Body({
-        //     type: p2.Body.STATIC,
-        //     position: [this.stage.stageWidth, -this.stage.stageHeight],
-        // });
-        // RigthPlaneBody.angle = -Math.PI / 2;
-        // RigthPlaneBody.displays = [];
-        // RigthPlaneBody.addShape(RigthPlaneShape);
-        // world.addBody(RigthPlaneBody);
+        let RigthPlaneShape: p2.Plane = new p2.Plane();
+        RigthPlaneShape.material = PlaneMaterial;
+        let RigthPlaneBody = new p2.Body({
+            type: p2.Body.STATIC,
+            position: [egret.MainContext.instance.stage.stageWidth / factor, 0],
+        });
+        RigthPlaneBody.angle = Math.PI / 2;
+        RigthPlaneBody.displays = [];
+        RigthPlaneBody.addShape(RigthPlaneShape);
+        world.addBody(RigthPlaneBody);
 
         egret.Ticker.getInstance().register(function (dt) {
             if (dt < 10) {
@@ -160,13 +162,6 @@ class Main extends egret.DisplayObjectContainer {
                 if (box) {
                     box.x = boxBody.position[0] * factor;
                     box.y = stageHeight - boxBody.position[1] * factor;
-                    box.rotation = 360 - (boxBody.angle + boxBody.shapes[0].angle) * 180 / Math.PI;
-                    if (boxBody.sleepState == p2.Body.SLEEPING) {
-                        box.alpha = 0.5;
-                    }
-                    else {
-                        box.alpha = 1;
-                    }
                 }
             }
         }, this);
@@ -182,9 +177,9 @@ class Main extends egret.DisplayObjectContainer {
 
             //添加圆形刚体
             //var boxShape: p2.Shape = new p2.Circle(1);
-            var boxShape: p2.Shape = new p2.Circle({ radius: 1 });
+            var boxShape: p2.Shape = new p2.Circle({ radius: 0.5 });
             boxShape.material = BallMaterial;
-            var boxBody: p2.Body = new p2.Body({ mass: 1, position: [positionX, positionY], velocity: [0, -5] });
+            var boxBody: p2.Body = new p2.Body({ mass: 1, damping: 0, fixedRotation: true, position: [positionX, positionY], velocity: [-10, -10] });
             boxBody.addShape(boxShape);
             world.addBody(boxBody);
 
