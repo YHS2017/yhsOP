@@ -1,0 +1,21 @@
+{
+  "name": "string-knitting",
+  "version": "0.0.1",
+  "description": "using string knitting image",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server"
+  },
+  "keywords": [
+    "string",
+    "knitting",
+    "art"
+  ],
+  "author": "midare",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "svg.js": "^2.6.3",
+    "zepto": "^1.2.0"
+  }
+}
