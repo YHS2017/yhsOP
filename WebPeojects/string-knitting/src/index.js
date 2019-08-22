@@ -68,9 +68,9 @@ function isDotOnLine(dot, start, end) {
 
 function isDone() {
   const colorlist = imageData.data.filter((a, index) => (index + 1) % 4 === 0);
-  const score = colorlist.filter(a => a === 254).length / colorlist.length;
+  const score = colorlist.filter(a => a === 254).length / colorlist.filter(a => a === 254 || a === 0).length;
+  // console.log(score);
   if (score >= 0.9) {
-    console.log(score);
     return true
   } else {
     return false
