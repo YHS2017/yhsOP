@@ -66,16 +66,16 @@ function isDotOnLine(dot, start, end) {
   }
 }
 
-function isDone() {
-  const colorlist = imageData.data.filter((a, index) => (index + 1) % 4 === 0);
-  const score = colorlist.filter(a => a === 254).length / colorlist.filter(a => a === 254 || a === 0).length;
-  // console.log(score);
-  if (score >= 0.9) {
-    return true
-  } else {
-    return false
-  }
-}
+// function isDone() {
+//   const colorlist = imageData.data.filter((a, index) => (index + 1) % 4 === 0);
+//   const score = colorlist.filter(a => a === 254).length / colorlist.filter(a => a === 254 || a === 0).length;
+//   // console.log(score);
+//   if (score >= 0.7) {
+//     return true
+//   } else {
+//     return false
+//   }
+// }
 
 
 
@@ -115,14 +115,12 @@ function reduceImageData(start, end) {
 
   dotList.forEach(dot => {
     const startIndex = (dot[1] * imageData.width + dot[0]) * 4; // rgba
-    // imageData.data[startIndex] += 50;
-
-    // if (imageData.data[startIndex] > 255) {
-    imageData.data[startIndex] = 255;
-    imageData.data[startIndex + 1] = 255;
-    imageData.data[startIndex + 2] = 255;
-    imageData.data[startIndex + 3] = 254;
-    // }
+    imageData.data[startIndex] = Math.min(255, imageData.data[startIndex] + 30);
+    imageData.data[startIndex + 1] = Math.min(255, imageData.data[startIndex + 1] + 30);
+    imageData.data[startIndex + 2] = Math.min(255, imageData.data[startIndex + 2] + 30);
+    if (imageData.data[startIndex] === 255 && imageData.data[startIndex + 1] === 255 && imageData.data[startIndex + 2] === 255) {
+      imageData.data[startIndex + 3] = 254
+    }
   });
 }
 
@@ -165,6 +163,8 @@ let imageData;
 let pinList;
 let lineList = [];
 let startPinIndex = 0;
+const lineLimit = 3000;
+let lineCount = 0;
 
 function draw() {
   let endPinIndex;
@@ -183,7 +183,8 @@ function draw() {
     }
   });
 
-  if (!isDone()) {
+  lineCount++;
+  if (lineCount <= lineLimit) {
     document.getElementsByTagName('h1')[0].innerHTML = '【' + startPinIndex + ',' + endPinIndex + '】';
     lineList.push([startPinIndex, endPinIndex]);
     drawLine(pinList[startPinIndex], pinList[endPinIndex]);
@@ -192,11 +193,12 @@ function draw() {
     setTimeout(() => {
       draw();
     }, 1);
-  } else {
-    const canvas = $("canvas")[0];
-    const ctx = canvas.getContext("2d");
-    ctx.putImageData(imageData, 0, 0);
   }
+  //  else {
+  //   const canvas = $("canvas")[0];
+  //   const ctx = canvas.getContext("2d");
+  //   ctx.putImageData(imageData, 0, 0);
+  // }
 }
 
 document.body.onclick = function () {
@@ -212,7 +214,7 @@ function init() {
   imageData = ctx.getImageData(0, 0, 600, 600);
   imageData.data = imageData.data.map((d, index) => {
     if ((index + 1) % 4 === 0) {
-      if (imageData.data[index - 1] + imageData.data[index - 2] + imageData.data[index - 3] <= 300) {
+      if (imageData.data[index - 1] + imageData.data[index - 2] + imageData.data[index - 3] <= 600) {
         return 0
       } else {
         return d
@@ -223,7 +225,7 @@ function init() {
   });
   // console.log(imageData.data.slice(0, 100));
 
-  pinList = generatePinList(100, 600, 600);
+  pinList = generatePinList(350, 600, 600);
 }
 
 $(() => {
