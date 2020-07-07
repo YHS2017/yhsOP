@@ -13,22 +13,14 @@ import GM from "../GM";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class Loading extends cc.Component {
-
-    @property(cc.Label)
-    text: cc.Label = null;
-
-    @property(cc.ProgressBar)
-    progressbar: cc.ProgressBar = null;
-
+export default class Home extends cc.Component {
     start() {
-        cc.loader.loadResDir("./", (completedCount: number, totalCount: number, item: any) => {
-            this.progressbar.progress = completedCount / totalCount;
-            this.text.string = "正在加载中(" + completedCount + "/" + totalCount + ")";
-        }, (error: Error, resource: any[]) => {
-            const homeprefab: cc.Node = cc.loader.getRes("./Module/Home", cc.Prefab);
-            const home: cc.Node = cc.instantiate(homeprefab);
-            GM.OpenUI(home);
-        });
+
+    }
+
+    toPlay() {
+        const gameprefab: cc.Node = cc.loader.getRes("./Module/Game", cc.Prefab);
+        const game: cc.Node = cc.instantiate(gameprefab);
+        GM.OpenUI(game);
     }
 }
