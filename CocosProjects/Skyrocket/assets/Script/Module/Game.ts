@@ -9,6 +9,7 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import PoolMgr from "../Game/PoolMgr";
+import Player from "../Game/Player";
 
 const { ccclass, property } = cc._decorator;
 
@@ -17,31 +18,67 @@ export default class Game extends cc.Component {
     @property(cc.Node)
     Player: cc.Node = null;
 
-    speed: number = 200;
-    minspan: number = 300;
-    maxspan: number = 700;
-    len: number = 0;
-    walltype: string = 'WallLeft';
-    span: number = 0;
+    @property(cc.Label)
+    ScoreText: cc.Label = null;
 
+    score: number = 0;
+    speed: number = 300;
+    barrierlen: number = 0;
+    awardlen: number = 0;
+    walltype: string = 'WallLeft';
+    awardspan: number = 0;
+    barrierspan: number = 0;
+
+    init() {
+        this.score = 0;
+        this.speed = 300;
+        this.barrierlen = 0;
+        this.awardlen = 0;
+        this.walltype = 'WallLeft';
+        this.awardspan = 0;
+        this.barrierspan = 0;
+    }
 
     start() {
+        this.init();
         this.node.on(cc.Node.EventType.TOUCH_MOVE, (event: cc.Event.EventTouch) => {
-            let delta1 = event.touch.getDelta();
-            this.Player.x += delta1.x;
-            this.Player.y += delta1.y;
+            let delta = event.touch.getDelta();
+            const player = this.Player.getComponent(Player);
+            if (delta.x > 0) {
+                player.vx = Math.min(player.vx + delta.x * 4, 600);
+            } else {
+                player.vx = Math.max(player.vx + delta.x * 4, -600);
+            }
+            if (delta.y > 0) {
+                player.vy = Math.min(player.vy + delta.y * 4, 600);
+            } else {
+                player.vy = Math.max(player.vy + delta.y * 4, -600);
+            }
         }, this.node);
+        const manager = cc.director.getCollisionManager();
+        manager.enabled = true;
     }
 
     update(dt: number) {
-        this.len += dt * this.speed;
-        if (!this.span) {
-            this.span = this.minspan + Math.random() * (this.maxspan - this.minspan);
+        this.barrierlen += dt * this.speed;
+        this.awardlen += dt * this.speed;
+        if (!this.barrierspan) {
+            this.barrierspan = 400 + Math.random() * 500;
         }
-        if (this.len >= this.span) {
-            this.span = 0;
-            this.len = 0;
+        if (this.barrierlen >= this.barrierspan) {
+            this.barrierspan = 0;
+            this.barrierlen = 0;
             this.creatWall();
+        }
+
+        if (!this.awardspan) {
+            this.awardspan = 200 + Math.random() * 250;
+        }
+        if (this.awardlen >= this.awardspan) {
+            this.awardspan = 0;
+            this.awardlen = 0;
+            this.creatStar();
+            this.creatStar();
         }
     }
 
@@ -50,12 +87,26 @@ export default class Game extends cc.Component {
         if (this.walltype === "WallLeft") {
             wall = PoolMgr.getWallFromPool(this.walltype);
             this.walltype = "WallRight";
-            wall.y = 1000;
+            wall.y = this.node.height / 2 + 5;
         } else {
             wall = PoolMgr.getWallFromPool(this.walltype);
             this.walltype = "WallLeft";
-            wall.y = 1000;
+            wall.y = this.node.height / 2 + 5;
         }
         this.node.addChild(wall);
+    }
+
+    creatStar() {
+        const star = PoolMgr.getStarFromPool();
+        const x = -this.node.width / 2 + Math.random() * 880;
+        const y = this.node.height / 2 + Math.random() * 300;
+        star.x = x;
+        star.y = y;
+        this.node.addChild(star);
+    }
+
+    addScore() {
+        this.score++;
+        this.ScoreText.string = "Score:" + this.score.toString();
     }
 }

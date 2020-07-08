@@ -11,6 +11,13 @@
     [
       false,
       true,
+      false,
+      true
+    ],
+    [
+      false,
+      false,
+      true,
       false
     ]
   ],
@@ -18,9 +25,9 @@
   "group-list": [
     "default",
     "award",
-    "player"
+    "player",
+    "barrier"
   ],
-  "start-scene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
   "design-resolution-width": 1080,
   "design-resolution-height": 1920,
   "fit-width": true,
@@ -43,5 +50,6 @@
     "live": {
       "enable": false
     }
-  }
+  },
+  "start-scene": "2d2f792f-a40c-49bb-a189-ed176a246e49"
 }
