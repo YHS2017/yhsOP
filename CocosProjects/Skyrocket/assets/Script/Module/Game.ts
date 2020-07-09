@@ -10,6 +10,7 @@
 
 import PoolMgr from "../Game/PoolMgr";
 import Player from "../Game/Player";
+import GM from "../GM";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,25 +19,34 @@ export default class Game extends cc.Component {
     @property(cc.Node)
     Player: cc.Node = null;
 
+    @property(cc.Node)
+    Fight: cc.Node = null;
+
     @property(cc.Label)
     ScoreText: cc.Label = null;
 
+    @property(cc.Node)
+    Over: cc.Node = null;
+
     score: number = 0;
     speed: number = 300;
+    maxspeed: number = 3000;
     barrierlen: number = 0;
     awardlen: number = 0;
-    walltype: string = 'WallLeft';
     awardspan: number = 0;
     barrierspan: number = 0;
+    isEnd: boolean = false;
+    powerful: boolean = true;
 
     init() {
         this.score = 0;
         this.speed = 300;
         this.barrierlen = 0;
         this.awardlen = 0;
-        this.walltype = 'WallLeft';
         this.awardspan = 0;
         this.barrierspan = 0;
+        this.isEnd = false;
+        this.powerful = false;
     }
 
     start() {
@@ -45,68 +55,95 @@ export default class Game extends cc.Component {
             let delta = event.touch.getDelta();
             const player = this.Player.getComponent(Player);
             if (delta.x > 0) {
-                player.vx = Math.min(player.vx + delta.x * 4, 600);
+                player.vx = Math.min(player.vx + delta.x * 2, 800);
             } else {
-                player.vx = Math.max(player.vx + delta.x * 4, -600);
+                player.vx = Math.max(player.vx + delta.x * 2, -800);
             }
             if (delta.y > 0) {
-                player.vy = Math.min(player.vy + delta.y * 4, 600);
+                player.vy = Math.min(player.vy + delta.y * 2, 800);
             } else {
-                player.vy = Math.max(player.vy + delta.y * 4, -600);
+                player.vy = Math.max(player.vy + delta.y * 2, -800);
             }
         }, this.node);
+        this.sprint();
         const manager = cc.director.getCollisionManager();
         manager.enabled = true;
     }
 
     update(dt: number) {
-        this.barrierlen += dt * this.speed;
-        this.awardlen += dt * this.speed;
-        if (!this.barrierspan) {
-            this.barrierspan = 400 + Math.random() * 500;
-        }
-        if (this.barrierlen >= this.barrierspan) {
-            this.barrierspan = 0;
-            this.barrierlen = 0;
-            this.creatWall();
-        }
+        if (!this.isEnd) {
+            this.barrierlen += dt * this.speed;
+            this.awardlen += dt * this.speed;
+            if (!this.barrierspan) {
+                this.barrierspan = 400 + Math.random() * 500;
+            }
+            if (this.barrierlen >= this.barrierspan) {
+                this.barrierspan = 0;
+                this.barrierlen = 0;
+                this.creatDarkCloud();
+            }
 
-        if (!this.awardspan) {
-            this.awardspan = 200 + Math.random() * 250;
-        }
-        if (this.awardlen >= this.awardspan) {
-            this.awardspan = 0;
-            this.awardlen = 0;
-            this.creatStar();
-            this.creatStar();
+            if (!this.awardspan) {
+                this.awardspan = 200 + Math.random() * 250;
+            }
+            if (this.awardlen >= this.awardspan) {
+                this.awardspan = 0;
+                this.awardlen = 0;
+                this.creatStar();
+                this.creatStar();
+            }
         }
     }
 
-    creatWall() {
-        let wall: cc.Node;
-        if (this.walltype === "WallLeft") {
-            wall = PoolMgr.getWallFromPool(this.walltype);
-            this.walltype = "WallRight";
-            wall.y = this.node.height / 2 + 5;
-        } else {
-            wall = PoolMgr.getWallFromPool(this.walltype);
-            this.walltype = "WallLeft";
-            wall.y = this.node.height / 2 + 5;
-        }
-        this.node.addChild(wall);
+    creatDarkCloud() {
+        const darkcloud: cc.Node = PoolMgr.getDarkCloudFromPool();
+        const x = -this.node.width / 2 + 50 + Math.random() * 980;
+        const y = this.node.height / 2 + 200;
+        darkcloud.x = x;
+        darkcloud.y = y;
+        this.Fight.addChild(darkcloud);
     }
 
     creatStar() {
         const star = PoolMgr.getStarFromPool();
-        const x = -this.node.width / 2 + Math.random() * 880;
+        const x = -this.node.width / 2 + 100 + Math.random() * 880;
         const y = this.node.height / 2 + Math.random() * 300;
         star.x = x;
         star.y = y;
-        this.node.addChild(star);
+        this.Fight.addChild(star);
+    }
+
+    sprint() {
+        this.powerful = true;
+        this.speed = this.maxspeed;
+        this.scheduleOnce(() => {
+            this.powerful = false;
+            this.speed = 300 + this.score;
+        }, 5);
     }
 
     addScore() {
         this.score++;
         this.ScoreText.string = "Score:" + this.score.toString();
+        if (!this.powerful) {
+            this.speed = 300 + this.score;
+        }
+    }
+
+    gameOver() {
+        this.isEnd = true;
+        this.Over.active = true;
+    }
+
+    gameContinu() {
+        this.isEnd = false;
+        this.Over.active = false;
+        this.sprint();
+    }
+
+    quitGame() {
+        const homeprefab: cc.Node = cc.loader.getRes("./Module/Home", cc.Prefab);
+        const home: cc.Node = cc.instantiate(homeprefab);
+        GM.OpenUI(home);
     }
 }

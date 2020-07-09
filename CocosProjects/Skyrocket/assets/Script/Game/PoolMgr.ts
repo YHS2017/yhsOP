@@ -12,33 +12,22 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class PoolMgr {
-    private static WallLeftPool: cc.NodePool = new cc.NodePool();
-    private static WallRightPool: cc.NodePool = new cc.NodePool();
+    private static DarkCloudPool: cc.NodePool = new cc.NodePool();
     private static StarPool: cc.NodePool = new cc.NodePool();
 
     /**
      * 获取墙节点
      * @param type 
      */
-    public static getWallFromPool(type: string): cc.Node {
-        let wall: cc.Node = null;
-        if (type === "WallLeft") {
-            if (this.WallLeftPool.size() > 0) {
-                wall = this.WallLeftPool.get();
-            } else {
-                const Prefab: cc.Prefab = cc.loader.getRes("Prefab/WallLeft", cc.Prefab);
-                wall = cc.instantiate(Prefab);
-            }
+    public static getDarkCloudFromPool(): cc.Node {
+        let darkcloud: cc.Node = null;
+        if (this.DarkCloudPool.size() > 0) {
+            darkcloud = this.DarkCloudPool.get();
         } else {
-            if (this.WallRightPool.size() > 0) {
-                wall = this.WallRightPool.get();
-            } else {
-                const Prefab: cc.Prefab = cc.loader.getRes("Prefab/WallRight", cc.Prefab);
-                wall = cc.instantiate(Prefab);
-            }
+            const Prefab: cc.Prefab = cc.loader.getRes("Prefab/DarkCloud", cc.Prefab);
+            darkcloud = cc.instantiate(Prefab);
         }
-        wall.name = type;
-        return wall;
+        return darkcloud;
     }
 
     /**
@@ -56,15 +45,11 @@ export default class PoolMgr {
     }
 
     /**
-     * 回收墙节点
-     * @param wall 
+     * 回收乌云节点
+     * @param darkcloud 
      */
-    public static returnToWallPool(wall: cc.Node) {
-        if (wall.name === "WallLeft") {
-            this.WallLeftPool.put(wall);
-        } else {
-            this.WallRightPool.put(wall);
-        }
+    public static returnToWallPool(darkcloud: cc.Node) {
+        this.DarkCloudPool.put(darkcloud);
     }
 
     /**

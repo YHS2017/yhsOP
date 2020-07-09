@@ -14,13 +14,16 @@ import PoolMgr from "./PoolMgr";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class Wall extends cc.Component {
+export default class DarkCloud extends cc.Component {
 
     update(dt: number) {
-        const len = this.node.parent.getComponent(Game).speed * dt;
-        this.node.y = this.node.y - len;
-        if (this.node.y < -1000) {
-            PoolMgr.returnToWallPool(this.node);
+        const game = this.node.parent.parent.getComponent(Game);
+        if (!game.isEnd) {
+            const len = game.speed * dt;
+            this.node.y = this.node.y - len;
+            if (this.node.y < -this.node.parent.parent.height / 2 - 100) {
+                PoolMgr.returnToWallPool(this.node);
+            }
         }
     }
 }

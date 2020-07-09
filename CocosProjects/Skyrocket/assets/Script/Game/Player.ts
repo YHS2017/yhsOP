@@ -18,43 +18,49 @@ export default class Player extends cc.Component {
 
     vx: number = 0;
     vy: number = 0;
-    damp: number = 10;
+    damp: number = 8;
 
     update(dt: number) {
-        const game = this.node.parent;
-        let x = this.node.x + this.vx * dt;
-        let y = this.node.y + this.vy * dt;
-        if (x < -game.width / 2) {
-            x = -game.width / 2;
-        }
-        if (x > game.width / 2) {
-            x = game.width / 2;
-        }
-        if (y < -game.height / 2) {
-            y = -game.height / 2
-        }
-        if (y > this.node.height / 2) {
-            y = this.node.height / 2;
-        }
-        this.node.x = x;
-        this.node.y = y;
-        if (this.vx > 0) {
-            this.vx = Math.max(this.vx - this.damp, 0);
-        } else {
-            this.vx = Math.min(this.vx + this.damp, 0);
-        }
-        if (this.vy > 0) {
-            this.vy = Math.max(this.vy - this.damp, 0);
-        } else {
-            this.vy = Math.min(this.vy + this.damp, 0);
+        const gamenode = this.node.parent.parent;
+        const game = gamenode.getComponent(Game);
+        if (!game.isEnd) {
+            let x = this.node.x + this.vx * dt;
+            let y = this.node.y + this.vy * dt;
+            if (x < -gamenode.width / 2) {
+                x = -gamenode.width / 2;
+            }
+            if (x > gamenode.width / 2) {
+                x = gamenode.width / 2;
+            }
+            if (y < -gamenode.height / 2) {
+                y = -gamenode.height / 2
+            }
+            if (y > gamenode.height / 2) {
+                y = gamenode.height / 2;
+            }
+            this.node.x = x;
+            this.node.y = y;
+            if (this.vx > 0) {
+                this.vx = Math.max(this.vx - this.damp, 0);
+            } else {
+                this.vx = Math.min(this.vx + this.damp, 0);
+            }
+            if (this.vy > 0) {
+                this.vy = Math.max(this.vy - this.damp, 0);
+            } else {
+                this.vy = Math.min(this.vy + this.damp, 0);
+            }
         }
     }
 
     onCollisionEnter(other: cc.Component, self: cc.Component) {
+        const game = this.node.parent.parent.getComponent(Game);
         if (other.node.group === "barrier") {
-
+            if (!game.powerful) {
+                game.gameOver();
+            }
         } else {
-            this.node.parent.getComponent(Game).addScore();
+            game.addScore();
             PoolMgr.returnToStarPool(other.node);
         }
     }
