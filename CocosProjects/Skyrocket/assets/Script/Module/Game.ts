@@ -19,6 +19,9 @@ export default class Game extends cc.Component {
     @property(cc.Node)
     Player: cc.Node = null;
 
+    @property(cc.ProgressBar)
+    Power: cc.ProgressBar = null;
+
     @property(cc.Node)
     Fight: cc.Node = null;
 
@@ -29,24 +32,26 @@ export default class Game extends cc.Component {
     Over: cc.Node = null;
 
     score: number = 0;
-    speed: number = 300;
+    speed: number = 0;
+    defaultspeed: number = 400;
     maxspeed: number = 3000;
     barrierlen: number = 0;
     awardlen: number = 0;
     awardspan: number = 0;
     barrierspan: number = 0;
     isEnd: boolean = false;
-    powerful: boolean = true;
+    power: number = 0;
+    maxpower: number = 50;
 
     init() {
         this.score = 0;
-        this.speed = 300;
+        this.speed = this.defaultspeed;
         this.barrierlen = 0;
         this.awardlen = 0;
         this.awardspan = 0;
         this.barrierspan = 0;
         this.isEnd = false;
-        this.powerful = false;
+        this.power = 0;
     }
 
     start() {
@@ -55,23 +60,26 @@ export default class Game extends cc.Component {
             let delta = event.touch.getDelta();
             const player = this.Player.getComponent(Player);
             if (delta.x > 0) {
-                player.vx = Math.min(player.vx + delta.x * 2, 800);
+                player.vx = Math.min(player.vx + delta.x * 4, 800);
             } else {
-                player.vx = Math.max(player.vx + delta.x * 2, -800);
+                player.vx = Math.max(player.vx + delta.x * 4, -800);
             }
             if (delta.y > 0) {
-                player.vy = Math.min(player.vy + delta.y * 2, 800);
+                player.vy = Math.min(player.vy + delta.y * 4, 800);
             } else {
-                player.vy = Math.max(player.vy + delta.y * 2, -800);
+                player.vy = Math.max(player.vy + delta.y * 4, -800);
             }
         }, this.node);
-        this.sprint();
+        const player = this.Player.getComponent(Player);
+        player.sprint();
         const manager = cc.director.getCollisionManager();
         manager.enabled = true;
     }
 
     update(dt: number) {
         if (!this.isEnd) {
+            this.score = this.score + Math.ceil(this.speed * dt / 10);
+            this.ScoreText.string = "高度: " + this.score.toString() + " 米";
             this.barrierlen += dt * this.speed;
             this.awardlen += dt * this.speed;
             if (!this.barrierspan) {
@@ -113,23 +121,6 @@ export default class Game extends cc.Component {
         this.Fight.addChild(star);
     }
 
-    sprint() {
-        this.powerful = true;
-        this.speed = this.maxspeed;
-        this.scheduleOnce(() => {
-            this.powerful = false;
-            this.speed = 300 + this.score;
-        }, 5);
-    }
-
-    addScore() {
-        this.score++;
-        this.ScoreText.string = "Score:" + this.score.toString();
-        if (!this.powerful) {
-            this.speed = 300 + this.score;
-        }
-    }
-
     gameOver() {
         this.isEnd = true;
         this.Over.active = true;
@@ -138,7 +129,8 @@ export default class Game extends cc.Component {
     gameContinu() {
         this.isEnd = false;
         this.Over.active = false;
-        this.sprint();
+        const player = this.Player.getComponent(Player);
+        player.sprint();
     }
 
     quitGame() {

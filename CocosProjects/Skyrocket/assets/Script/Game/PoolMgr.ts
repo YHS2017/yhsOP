@@ -13,7 +13,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class PoolMgr {
     private static DarkCloudPool: cc.NodePool = new cc.NodePool();
-    private static StarPool: cc.NodePool = new cc.NodePool();
+    private static AwardPool: cc.NodePool = new cc.NodePool();
 
     /**
      * 获取墙节点
@@ -31,12 +31,12 @@ export default class PoolMgr {
     }
 
     /**
-     * 获取星星节点
+     * 获取奖励节点
      */
     public static getStarFromPool(): cc.Node {
         let star: cc.Node = null;
-        if (this.StarPool.size() > 0) {
-            star = this.StarPool.get();
+        if (this.AwardPool.size() > 0) {
+            star = this.AwardPool.get();
         } else {
             const Prefab: cc.Prefab = cc.loader.getRes("Prefab/Star", cc.Prefab);
             star = cc.instantiate(Prefab);
@@ -56,7 +56,7 @@ export default class PoolMgr {
      * 回收星星节点
      * @param wall 
      */
-    public static returnToStarPool(star: cc.Node) {
-        this.StarPool.put(star);
+    public static returnToStarPool(award: cc.Node) {
+        this.AwardPool.put(award);
     }
 }

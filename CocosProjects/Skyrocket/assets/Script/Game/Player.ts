@@ -16,9 +16,14 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class Player extends cc.Component {
 
+    @property(cc.Node)
+    Player: cc.Node = null;
+
     vx: number = 0;
     vy: number = 0;
-    damp: number = 8;
+    powerful: boolean = true;
+    invincible: boolean = false;
+    damp: number = 10;
 
     update(dt: number) {
         const gamenode = this.node.parent.parent;
@@ -56,13 +61,39 @@ export default class Player extends cc.Component {
     onCollisionEnter(other: cc.Component, self: cc.Component) {
         const game = this.node.parent.parent.getComponent(Game);
         if (other.node.group === "barrier") {
-            if (!game.powerful) {
+            if (!this.invincible) {
                 game.gameOver();
             }
         } else {
-            game.addScore();
+            this.addAward();
             PoolMgr.returnToStarPool(other.node);
         }
+    }
+
+    addAward() {
+        const game = this.node.parent.parent.getComponent(Game);
+        if (!this.powerful) {
+            game.power++;
+            game.Power.progress = game.power / game.maxpower;
+            game.speed = game.defaultspeed + Math.sqrt(game.score) * 5;
+            if (game.power === game.maxpower) {
+                this.sprint();
+                game.power = 0;
+                game.Power.progress = game.power / game.maxpower;
+            }
+        }
+    }
+
+    sprint() {
+        const game = this.node.parent.parent.getComponent(Game);
+        this.powerful = true;
+        this.invincible = true;
+        game.speed = game.maxspeed;
+        this.scheduleOnce(() => {
+            this.powerful = false;
+            game.speed = game.defaultspeed + Math.sqrt(game.score) * 5;
+        }, 5);
+        this.scheduleOnce(() => { this.invincible = false }, 7);
     }
 
 }
