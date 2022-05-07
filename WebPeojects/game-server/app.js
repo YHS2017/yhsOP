@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const io = require('socket.io');
-const Game = require('./game');
+const Game = require('./src/game');
 
 const app = express();
 
@@ -15,8 +15,8 @@ const socket = io(server, {
 
 const game = new Game();
 
-socket.on('connection', (client) => {
-  console.log('Client connected');
+socket.on('connect', (client) => {
+  console.log(`Client connected:${client.id}`);
   const player = game.addPlayer(client.id);
   client.join(player.roomId);
   socket.to(client.id).emit('added', player);
@@ -24,15 +24,18 @@ socket.on('connection', (client) => {
   socket.to(player.roomId).emit('joined', room.players);
 
   client.on('disconnect', () => {
-    console.log('Client disconnected');
-    const player = game.getPlayer(client.id);
+    console.log(`Client disconnected:${client.id}`);
+    const player = { ...game.getPlayer(client.id) };
     game.removePlayer(player);
-    socket.to(room.id).emit('leaved', player);
+    const room = game.getRoom(player.roomId);
+    if (room) {
+      socket.to(room.id).emit('leaved', client.id);
+    }
   });
 
-  client.on('message', (message) => {
-    console.log('Message received: ', message);
-    socket.emit('message', message);
+  client.on('update', (prv_player) => {
+    console.log('update: ', prv_player);
+    socket.to(prv_player.roomId).emit('update', prv_player);
   });
 });
 
