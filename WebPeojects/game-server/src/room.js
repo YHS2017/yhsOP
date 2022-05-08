@@ -25,6 +25,7 @@ function Room (roomId) {
       }
       return p;
     });
+    return this.players.find(p => p.id === player.id);
   }
 }
 

@@ -1,8 +1,6 @@
-import { World, Model, ThirdPersonCamera, Skybox, Keyboard, usePreload, Editor, Toolbar, SceneGraph, useLoop } from "lingo3d-react"
-import { createRef, useEffect, useState } from "react"
-import { io } from 'socket.io-client';
-
-const socket = io('http://localhost:5000/');
+import { World, Model, ThirdPersonCamera, Skybox, Keyboard, Joystick, usePreload, Editor, Toolbar, SceneGraph, useLoop } from "lingo3d-react"
+import { createRef, useEffect, useState, useCallback, useRef } from "react"
+import socket from "./msgCenter/msgServer"
 
 const App = () => {
   const progress = usePreload([
@@ -20,50 +18,70 @@ const App = () => {
   // 当前玩家
   const [Me, setMe] = useState<any>({});
 
-  const update = (player: any) => {
-    if (Me.id === player.id) {
-      setMe({ ...Me, ...player });
-    } else {
-      console.log(Me, player);
-      let players = Players;
-      if (players.find((p: any) => p.id === player.id) !== undefined) {
-        players = players.map((p: any) => {
-          if (p.id === player.id) {
-            return { ...p, ...player };
-          }
-          return p;
-        });
-      } else {
-        players.push({ ...player, ref: createRef() });
-      }
-      setPlayers(players);
-    }
-  }
-
-  useEffect(() => {
-
+  // 初始化socket事件监听
+  const initSocketListener = useCallback(() => {
     socket.on("added", (player) => {
-      setMe({ ...player, ref: createRef() });
+      setMe((oldMe: any) => ({ ...oldMe, ...player, ref: createRef() }));
     })
 
     socket.on("leaved", (playerid) => {
-      setPlayers(Players.filter((player: any) => player.id !== playerid));
+      setPlayers((oldPlayers: any) => oldPlayers.filter((player: any) => player.id !== playerid));
     })
 
     socket.on("update", (player) => {
-      update(player);
+      setMe((oldMe: any) => {
+        if (oldMe.id === player.id) {
+          return { ...oldMe, ...player }
+        }
+        setPlayers((oldPlayers: any) => {
+          let players = oldPlayers;
+          if (players.find((p: any) => p.id === player.id) !== undefined) {
+            players = players.map((p: any) => {
+              if (p.id === player.id) {
+                return { ...p, ...player };
+              }
+              return p;
+            });
+          } else {
+            players.push({ ...player, ref: createRef() });
+          }
+          return players;
+        });
+        return oldMe;
+      });
     })
-  }, [Players, Me, update]);
+  }, [Me, Players]);
+
+  useEffect(() => {
+    initSocketListener();
+  }, [initSocketListener]);
 
   const onkeydown = (key: any) => {
     if (key === "w") {
-      socket.emit("update", { id: Me.id, roomId: Me.roomId, motion: "run" });
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 0, motion: "run" });
+    }
+    if (key === "s") {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 180, motion: "run" });
+    }
+    if (key === "a") {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 90, motion: "run" });
+    }
+    if (key === "d") {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: -90, motion: "run" });
     }
   }
 
   const onkeyup = (key: any) => {
-    if (key === "w") {
+    if (key === "w" || key === "s" || key === "a" || key === "d") {
       socket.emit("update", { id: Me.id, roomId: Me.roomId, motion: "idle" });
+    }
+  }
+
+  const onmove = (e: any) => {
+    if (e.x < 8 && e.x > -8 && e.y < 8 && e.y > -8) {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, motion: "idle" });
+    } else {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: e.angle * (-1) - 90, motion: "run" });
     }
   }
 
@@ -101,7 +119,7 @@ const App = () => {
     <>
       <World>
         <Skybox texture="sky2.jpeg" />
-        <ThirdPersonCamera active mouseControl>
+        <ThirdPersonCamera active mouseControl lockTargetRotation={false}>
           <Model
             ref={Me.ref}
             src="hql.fbx"
@@ -111,6 +129,9 @@ const App = () => {
             x={Me.x}
             y={Me.y}
             z={Me.z}
+            rotationX={Me.rx}
+            rotationY={Me.ry}
+            rotationZ={Me.rz}
           />
         </ThirdPersonCamera>
         {Players.map((player: any) => <Model
@@ -123,6 +144,9 @@ const App = () => {
           x={player.x}
           y={player.y}
           z={player.z}
+          rotationX={player.rx}
+          rotationY={player.ry}
+          rotationZ={player.rz}
         />)}
         <Model src="city.fbx" physics="map" scale={50} />
         {/* <Toolbar />
@@ -130,6 +154,7 @@ const App = () => {
       <Editor /> */}
       </World>
       <Keyboard onKeyDown={onkeydown} onKeyUp={onkeyup} />
+      <Joystick onMove={onmove} />
     </>
   )
 }
