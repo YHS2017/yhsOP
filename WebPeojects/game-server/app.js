@@ -34,7 +34,6 @@ socket.on('connect', (client) => {
   });
 
   client.on('update', (prv_player) => {
-    console.log('update: ', prv_player);
     socket.to(prv_player.roomId).emit('update', prv_player);
   });
 });
