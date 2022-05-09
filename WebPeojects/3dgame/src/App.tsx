@@ -1,6 +1,6 @@
-import { World, Model, ThirdPersonCamera, Skybox, Keyboard, Joystick, usePreload, Editor, Toolbar, SceneGraph, useLoop } from "lingo3d-react"
+import { World, Model, ThirdPersonCamera, Skybox, Joystick, Keyboard, usePreload, Editor, Toolbar, SceneGraph, useLoop } from "lingo3d-react"
 import { createRef, useEffect, useState, useCallback, useRef } from "react"
-import socket from "./msgCenter/msgServer"
+import socket from "./utils/socket"
 
 const App = () => {
   const progress = usePreload([
@@ -16,7 +16,16 @@ const App = () => {
   const [Players, setPlayers] = useState<any[]>([]);
 
   // 当前玩家
-  const [Me, setMe] = useState<any>({});
+  const [Me, setMe] = useState<any>([]);
+
+  // 按键
+  const keys = useRef<any[]>([]);
+
+  // 摇杆
+  const joystick = useRef<any>(false);
+
+  // 编辑开关
+  const [CanEditor, setCanEditor] = useState(false);
 
   // 初始化socket事件监听
   const initSocketListener = useCallback(() => {
@@ -56,32 +65,63 @@ const App = () => {
     initSocketListener();
   }, [initSocketListener]);
 
-  const onkeydown = (key: any) => {
-    if (key === "w") {
+  const keychange = (keys: any) => {
+    if (keys.includes("w") && !keys.includes("s") && !keys.includes("a") && !keys.includes("d")) {
       socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 0, motion: "run" });
     }
-    if (key === "s") {
+    if (keys.includes("s") && !keys.includes("w") && !keys.includes("a") && !keys.includes("d")) {
       socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 180, motion: "run" });
     }
-    if (key === "a") {
+    if (keys.includes("a") && !keys.includes("w") && !keys.includes("s") && !keys.includes("d")) {
       socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 90, motion: "run" });
     }
-    if (key === "d") {
+    if (keys.includes("d") && !keys.includes("w") && !keys.includes("s") && !keys.includes("a")) {
       socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: -90, motion: "run" });
+    }
+    if (keys.length >= 2 && keys.includes("w") && keys.includes("a")) {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 45, motion: "run" });
+    }
+    if (keys.length >= 2 && keys.includes("w") && keys.includes("d")) {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: -45, motion: "run" });
+    }
+    if (keys.length >= 2 && keys.includes("s") && keys.includes("a")) {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: 135, motion: "run" });
+    }
+    if (keys.length >= 2 && keys.includes("s") && keys.includes("d")) {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: -135, motion: "run" });
+    }
+    if (!(keys.includes("w") || keys.includes("s") || keys.includes("a") || keys.includes("d"))) {
+      socket.emit("update", { id: Me.id, roomId: Me.roomId, motion: "idle" });
+    }
+  }
+
+  const onkeydown = (key: any) => {
+    keys.current.push(key);
+    keychange(keys.current);
+    if (key === "Insert") {
+      setCanEditor(!CanEditor);
     }
   }
 
   const onkeyup = (key: any) => {
-    if (key === "w" || key === "s" || key === "a" || key === "d") {
-      socket.emit("update", { id: Me.id, roomId: Me.roomId, motion: "idle" });
-    }
+    keys.current = keys.current.filter((k: any) => k !== key);
+    keychange(keys.current);
+  }
+
+  const onmovestart = () => {
+    joystick.current = true;
+  }
+
+  const onmoveend = () => {
+    joystick.current = false;
+    socket.emit("update", { id: Me.id, roomId: Me.roomId, motion: "idle" });
   }
 
   const onmove = (e: any) => {
-    if (e.x < 8 && e.x > -8 && e.y < 8 && e.y > -8) {
-      socket.emit("update", { id: Me.id, roomId: Me.roomId, motion: "idle" });
-    } else {
-      socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: e.angle * (-1) - 90, motion: "run" });
+    if (joystick.current) {
+      if (joystick.current && (e.x > 8 || e.x < -8 || e.y > 8 || e.y < -8)) {
+        socket.emit("update", { id: Me.id, roomId: Me.roomId, x: Me.ref.current.x, y: Me.ref.current.y, z: Me.ref.current.z, ry: e.angle * (-1) - 90, motion: "run" });
+      }
     }
   }
 
@@ -149,12 +189,16 @@ const App = () => {
           rotationZ={player.rz}
         />)}
         <Model src="city.fbx" physics="map" scale={50} />
-        {/* <Toolbar />
-      <SceneGraph />
-      <Editor /> */}
+        {CanEditor ?
+          <>
+            <Toolbar />
+            <SceneGraph />
+            <Editor />
+          </> : null
+        }
       </World>
       <Keyboard onKeyDown={onkeydown} onKeyUp={onkeyup} />
-      <Joystick onMove={onmove} />
+      <Joystick onMove={onmove} onMoveStart={onmovestart} onMoveEnd={onmoveend} />
     </>
   )
 }
