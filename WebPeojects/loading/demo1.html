@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>风车加载动画</title>
+  </head>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes run {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      animation: run 1.5s linear infinite;
+    }
+
+    .loading b {
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 100px;
+      left: 100px;
+      overflow: visible;
+    }
+
+    .loading b:first-child::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: -100px;
+      left: 0px;
+      border: 50px solid transparent;
+      border-left-color: #f44336;
+    }
+
+    .loading b:first-child::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 0px;
+      left: -100px;
+      border: 50px solid transparent;
+      border-right-color: #4caf50;
+    }
+
+    .loading b:last-child::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: -100px;
+      left: -100px;
+      border: 50px solid transparent;
+      border-bottom-color: #ffeb3b;
+    }
+
+    .loading b:last-child::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 0;
+      left: 0;
+      border: 50px solid transparent;
+      border-top-color: #039be5;
+    }
+  </style>
+  <body>
+    <div class="loading">
+      <b></b>
+      <b></b>
+    </div>
+  </body>
+</html>

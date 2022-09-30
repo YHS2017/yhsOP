@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>点点加载动画</title>
+  </head>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes run {
+      0% {
+        width: 24px;
+        height: 24px;
+        background-color: rgb(76, 175, 89);
+      }
+      30% {
+        width: 12px;
+        height: 12px;
+        background-color: rgb(114, 76, 175);
+      }
+      60%,
+      100% {
+        width: 0px;
+        height: 0px;
+        background-color: rgb(255, 0, 255);
+      }
+    }
+
+    .loading {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .loading b {
+      position: absolute;
+      border-radius: 50%;
+      top: 0px;
+      left: 88px;
+      transform-origin: 50% 100px;
+    }
+
+    .loading b:nth-child(1) {
+      transform: rotate(0deg);
+      animation: run 2.3s linear infinite;
+    }
+
+    .loading b:nth-child(2) {
+      transform: rotate(15deg);
+      animation: run 2.3s linear 0.1s infinite;
+    }
+
+    .loading b:nth-child(3) {
+      transform: rotate(30deg);
+      animation: run 2.3s linear 0.2s infinite;
+    }
+
+    .loading b:nth-child(4) {
+      transform: rotate(45deg);
+      animation: run 2.3s linear 0.3s infinite;
+    }
+
+    .loading b:nth-child(5) {
+      transform: rotate(60deg);
+      animation: run 2.3s linear 0.4s infinite;
+    }
+
+    .loading b:nth-child(6) {
+      transform: rotate(75deg);
+      animation: run 2.3s linear 0.5s infinite;
+    }
+
+    .loading b:nth-child(7) {
+      transform: rotate(90deg);
+      animation: run 2.3s linear 0.6s infinite;
+    }
+
+    .loading b:nth-child(8) {
+      transform: rotate(105deg);
+      animation: run 2.3s linear 0.7s infinite;
+    }
+
+    .loading b:nth-child(9) {
+      transform: rotate(120deg);
+      animation: run 2.3s linear 0.8s infinite;
+    }
+
+    .loading b:nth-child(10) {
+      transform: rotate(135deg);
+      animation: run 2.3s linear 0.9s infinite;
+    }
+
+    .loading b:nth-child(11) {
+      transform: rotate(150deg);
+      animation: run 2.3s linear 1s infinite;
+    }
+
+    .loading b:nth-child(12) {
+      transform: rotate(165deg);
+      animation: run 2.3s linear 1.1s infinite;
+    }
+
+    .loading b:nth-child(13) {
+      transform: rotate(180deg);
+      animation: run 2.3s linear 1.2s infinite;
+    }
+
+    .loading b:nth-child(14) {
+      transform: rotate(195deg);
+      animation: run 2.3s linear 1.3s infinite;
+    }
+
+    .loading b:nth-child(15) {
+      transform: rotate(210deg);
+      animation: run 2.3s linear 1.4s infinite;
+    }
+
+    .loading b:nth-child(16) {
+      transform: rotate(225deg);
+      animation: run 2.3s linear 1.5s infinite;
+    }
+
+    .loading b:nth-child(17) {
+      transform: rotate(240deg);
+      animation: run 2.3s linear 1.6s infinite;
+    }
+
+    .loading b:nth-child(18) {
+      transform: rotate(255deg);
+      animation: run 2.3s linear 1.7s infinite;
+    }
+
+    .loading b:nth-child(19) {
+      transform: rotate(270deg);
+      animation: run 2.3s linear 1.8s infinite;
+    }
+
+    .loading b:nth-child(20) {
+      transform: rotate(285deg);
+      animation: run 2.3s linear 1.9s infinite;
+    }
+
+    .loading b:nth-child(21) {
+      transform: rotate(300deg);
+      animation: run 2.3s linear 2s infinite;
+    }
+
+    .loading b:nth-child(22) {
+      transform: rotate(315deg);
+      animation: run 2.3s linear 2.1s infinite;
+    }
+
+    .loading b:nth-child(23) {
+      transform: rotate(330deg);
+      animation: run 2.3s linear 2.2s infinite;
+    }
+
+    .loading b:nth-child(24) {
+      transform: rotate(345deg);
+      animation: run 2.3s linear 2.3s infinite;
+    }
+  </style>
+  <body>
+    <div class="loading">
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+      <b></b>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+body{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.clock{
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  left: calc(50vw - 350px);
+  top: calc(50vh - 350px);
+  border-radius: 350px;
+  background-color: #333;
+}
+
+.p{
+  position: absolute;
+  width: 20px;
+  height: 300px;
+  left: 340px;
+  top: 0;
+  background-color: #555;
+  z-index: 1;
+}
+
+.h,.m,.s{
+  position: absolute;
+  overflow: visible;
+  transition: transform 0.2s ease-in-out;
+}
+
+.h{
+  width: 300px;
+  height: 300px;
+  left: 200px;
+  top: 200px;
+  border-radius: 150px;
+  border:1px solid #fff;
+  z-index: 4;
+}
+
+.m{
+  width: 500px;
+  height: 500px;
+  left: 100px;
+  top: 100px;
+  border-radius: 250px;
+  border:1px solid #fff;
+  z-index: 3;
+}
+
+.s{
+  width: 700px;
+  height: 700px;
+  left: 0;
+  top: 0;
+  border-radius: 350px;
+  border:1px solid #fff;
+  z-index: 2;
+}
+
+.h div,.m div, .s div{
+  position: absolute;
+  top: 0;
+  color: #fff;
+  height: 100px;
+  width: 20px;
+}
+
+.h div{
+  left: 140px;
+  transform-origin: 50% 150px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.m div{
+  left: 240px;
+  transform-origin: 50% 250px;
+  transition: transform 1s ease-in-out;
+}
+
+.s div{
+  left: 340px;
+  transform-origin: 50% 350px;
+  transition: transform 1.5s ease-in-out;
+}
+

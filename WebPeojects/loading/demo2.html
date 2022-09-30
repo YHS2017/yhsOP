@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小行星加载动画</title>
+  </head>
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes run {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .loading b {
+      position: absolute;
+      border-radius: 50%;
+      border-style: solid;
+      border-color: transparent;
+      box-sizing: border-box;
+    }
+
+    .loading b:nth-child(1) {
+      width: 200px;
+      height: 200px;
+      border-width: 14px 14px 0 0;
+      animation: run 1.6s linear infinite;
+      --color: #ff5722;
+      border-top-color: var(--color);
+    }
+
+    .loading b:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      top: 40px;
+      left: 40px;
+      border-width: 12px 0 0 12px;
+      animation: run 0.8s linear infinite reverse;
+      --color: #4caf50;
+      border-top-color: var(--color);
+    }
+
+    .loading b::before {
+      content: "";
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
+
+    .loading b:nth-child(1)::before {
+      top: 14px;
+      right: 0px;
+      background-color: var(--color);
+      box-shadow: 0 0 20px var(--color);
+    }
+
+    .loading b:nth-child(2)::before {
+      top: -8px;
+      left: 0px;
+      background-color: var(--color);
+      box-shadow: 0 0 20px var(--color);
+    }
+  </style>
+  <body>
+    <div class="loading">
+      <b></b>
+      <b></b>
+    </div>
+  </body>
+</html>
