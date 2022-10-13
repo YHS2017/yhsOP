@@ -71,11 +71,11 @@
       <canvas id="canvas"></canvas>
     </div>
     <script>
-      var audioContext, analyser, canvasCtx, dataArray;
       var oW = 800;
       var oH = 800;
 
       window.onload = function () {
+        var audioContext, analyser, canvasCtx, filedata, dataArray;
         canvas.width = oW;
         canvas.height = oH;
         canvasCtx = canvas.getContext("2d");
@@ -91,6 +91,43 @@
 
         var fileInput = document.querySelector("#musicFile");
         var btn = document.querySelector("#startStop");
+
+        function draw() {
+          requestAnimationFrame(draw);
+          var barHeight;
+          // 自定义获取数组里边数据的频步
+          canvasCtx.clearRect(-oW / 2, -oH / 2, oW, oH);
+          analyser.getByteFrequencyData(dataArray);
+          for (var i = 0; i < 90; i++) {
+            barHeight = dataArray[i] / 1.2 + 1;
+            canvasCtx.fillStyle = color;
+            canvasCtx.fillRect(0, 100, 2, barHeight);
+            canvasCtx.rotate((Math.PI * 2) / 180);
+          }
+          for (var i = 89; i >= 0; i--) {
+            barHeight = dataArray[i] / 1.2 + 1;
+            canvasCtx.fillStyle = color;
+            canvasCtx.fillRect(0, 100, 2, barHeight);
+            canvasCtx.rotate((Math.PI * 2) / 180);
+          }
+        }
+
+        function decodefiledata() {
+          audioContext.decodeAudioData(filedata, function (buffer) {
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            analyser.connect(audioContext.destination);
+            var audioBufferSourceNode = audioContext.createBufferSource();
+            audioBufferSourceNode.connect(analyser);
+            audioBufferSourceNode.buffer = buffer;
+            audioBufferSourceNode.loop = true;
+            audioBufferSourceNode.start();
+            var bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+            audioContext.suspend();
+            draw();
+          });
+        }
 
         fileInput.onchange = function (e) {
           console.log("changed!");
@@ -108,18 +145,8 @@
           var fileReader = new FileReader();
           fileReader.readAsArrayBuffer(file);
           fileReader.onload = function (event) {
-            audioContext.decodeAudioData(event.target.result, function (buffer) {
-              var audioBufferSourceNode = audioContext.createBufferSource();
-              analyser = audioContext.createAnalyser();
-              analyser.fftSize = 256;
-              audioBufferSourceNode.connect(analyser);
-              analyser.connect(audioContext.destination);
-              audioBufferSourceNode.buffer = buffer;
-              audioBufferSourceNode.start();
-              var bufferLength = analyser.frequencyBinCount;
-              dataArray = new Uint8Array(bufferLength);
-            });
-            audioContext.suspend();
+            filedata = event.target.result;
+            decodefiledata();
           };
         };
 
@@ -130,35 +157,11 @@
               audioContext.suspend().then(function () {
                 btn.value = "播放";
               });
-            } else if (audioContext.state === "suspended") {
+            } else {
               audioContext.resume().then(function () {
                 btn.value = "暂停";
               });
-            } else if (audioContext.state === "closed") {
-              audioContext.start().then(function () {
-                btn.value = "暂停";
-              });
             }
-            function draw() {
-              requestAnimationFrame(draw);
-              var barHeight;
-              // 自定义获取数组里边数据的频步
-              canvasCtx.clearRect(-oW / 2, -oH / 2, oW, oH);
-              analyser.getByteFrequencyData(dataArray);
-              for (var i = 0; i < 90; i++) {
-                barHeight = dataArray[i] / 1.2 + 1;
-                canvasCtx.fillStyle = color;
-                canvasCtx.fillRect(0, 100, 2, barHeight);
-                canvasCtx.rotate((Math.PI * 2) / 180);
-              }
-              for (var i = 89; i >= 0; i--) {
-                barHeight = dataArray[i] / 1.2 + 1;
-                canvasCtx.fillStyle = color;
-                canvasCtx.fillRect(0, 100, 2, barHeight);
-                canvasCtx.rotate((Math.PI * 2) / 180);
-              }
-            }
-            draw();
           }
         };
       };

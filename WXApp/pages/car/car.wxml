@@ -1,6 +1,0 @@
-<view class="container">
-  <block>
-    <image class="car-null-image" src="../../images/cart-null.png" mode="widthFix" />
-    <text class="car-null-text">什么都没有...</text>
-  </block>
-</view>
